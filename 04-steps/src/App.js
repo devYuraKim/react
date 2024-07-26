@@ -8,6 +8,10 @@ const messages = [
 ];
 
 function App() {
+  return <Steps />;
+}
+
+function Steps() {
   const [step, setStep] = useState(1);
   const [isOpen, setIsOpen] = useState(true);
   // const [test, setTest] = useState({ name: "Yura" });
