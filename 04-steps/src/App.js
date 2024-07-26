@@ -13,19 +13,22 @@ function App() {
   // const [test, setTest] = useState({ name: "Yura" });
 
   function handlePrevious() {
-    if (step > 1) setStep(step - 1);
+    if (step > 1) setStep((curState) => curState - 1);
     else alert("can't go lower than 1");
   }
   function handleNext() {
     // setTest({ name: "" });
-    if (step < 3) setStep(step + 1);
+    if (step < 3) setStep((curState) => curState + 1);
     else alert("can't go higher than 3");
   }
 
   return (
     <>
       {" "}
-      <button className="close" onClick={() => setIsOpen(!isOpen)}>
+      <button
+        className="close"
+        onClick={() => setIsOpen((curState) => !curState)}
+      >
         &times;
       </button>
       {isOpen && (
