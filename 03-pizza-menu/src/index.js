@@ -70,22 +70,37 @@ function Header() {
 }
 
 function Menu() {
+  const pizzas = pizzaData;
+  const numPizzas = pizzas.length;
+
   return (
     <main className="menu">
       <h2>Our menu</h2>
+      {/* conditional rendering */}
+      {/* {numPizzas > 0 && (
+        <ul className="pizzas">
+          {pizzas.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      )} */}
 
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} key={pizza.name} />
-        ))}
-      </ul>
+      {numPizzas > 0 ? (
+        <ul className="pizzas">
+          {pizzas.map((pizza) => (
+            <Pizza pizzaObj={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      ) : (
+        <p>we're working on our menu. please come back later!</p>
+      )}
     </main>
   );
 }
 
 function Footer() {
   const hour = new Date().getHours();
-  const openHour = 12;
+  const openHour = 11;
   const closeHour = 20;
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
@@ -94,7 +109,18 @@ function Footer() {
 
   return (
     <footer className="footer">
-      Today is {new Date().toLocaleDateString()}: We're currently open
+      Today is {new Date().toLocaleDateString()}.
+      {isOpen ? (
+        <div className="order">
+          <p>We're open until {closeHour}:00.</p>
+          <button className="btn">order</button>
+        </div>
+      ) : (
+        <p>
+          Sorry, we're closed! We're happy to welcome yo between {openHour}:00
+          and {closeHour}:00
+        </p>
+      )}
     </footer>
   );
   //return React.createElement("footer", null, "We're currently open!");
