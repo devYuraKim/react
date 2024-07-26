@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import ReactDOM from "react-dom/client";
 
 import "./index.css";
@@ -76,6 +76,7 @@ function Menu() {
   return (
     <main className="menu">
       <h2>Our menu</h2>
+
       {/* conditional rendering */}
       {/* {numPizzas > 0 && (
         <ul className="pizzas">
@@ -86,11 +87,18 @@ function Menu() {
       )} */}
 
       {numPizzas > 0 ? (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
-          ))}
-        </ul>
+        <Fragment>
+          <p>
+            Authentic Italian cuisine. 6 dishes to choose from. All organic, all
+            from our stone oven.
+          </p>
+
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza pizza={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </Fragment>
       ) : (
         <p>we're working on our menu. please come back later!</p>
       )}
@@ -111,10 +119,7 @@ function Footer() {
     <footer className="footer">
       Today is {new Date().toLocaleDateString()}.
       {isOpen ? (
-        <div className="order">
-          <p>We're open until {closeHour}:00.</p>
-          <button className="btn">order</button>
-        </div>
+        <Order closeHour={closeHour} />
       ) : (
         <p>
           Sorry, we're closed! We're happy to welcome yo between {openHour}:00
@@ -126,15 +131,27 @@ function Footer() {
   //return React.createElement("footer", null, "We're currently open!");
 }
 
-function Pizza(props) {
-  console.log(props);
+function Order({ closeHour }) {
   return (
-    <li className="pizza">
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+    <div className="order">
+      <p>We're open until {closeHour}:00. Visit us or order online!</p>
+      <button className="btn">order</button>
+    </div>
+  );
+}
+
+function Pizza({ pizza }) {
+  console.log({ pizza });
+
+  // if (pizza.soldOut) return null;
+
+  return (
+    <li className={`pizza ${pizza.soldOut ? "sold-out" : ""}`}>
+      <img src={pizza.photoName} alt={pizza.name} />
       <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price + 3}</span>
+        <h3>{pizza.name}</h3>
+        <p>{pizza.ingredients}</p>
+        <span> {pizza.soldOut ? "SOLD OUT" : `$${pizza.price + 3}`} </span>
       </div>
     </li>
   );
