@@ -1,5 +1,38 @@
 import "./App.css";
 
+const skills = [
+  {
+    skill: "HTML+CSS",
+    level: "advanced",
+    color: "#2662EA",
+  },
+  {
+    skill: "JavaScript",
+    level: "advanced",
+    color: "#EFD81D",
+  },
+  {
+    skill: "Web Design",
+    level: "advanced",
+    color: "#C3DCAF",
+  },
+  {
+    skill: "Git and GitHub",
+    level: "intermediate",
+    color: "#E84F33",
+  },
+  {
+    skill: "React",
+    level: "advanced",
+    color: "#60DAFB",
+  },
+  {
+    skill: "Svelte",
+    level: "beginner",
+    color: "#FF3B00",
+  },
+];
+
 function App() {
   return (
     <div className="card">
@@ -31,17 +64,24 @@ function Intro() {
 function SkillList() {
   return (
     <div className="skill-list">
-      <Skill name="React😀" color="blue" />
-      <Skill name="Spring Boot😀" color="green" />
-      <Skill name="Java😀" color="brown" />
+      {skills.map((skill) => (
+        <Skill skill={skill} />
+      ))}
     </div>
   );
 }
 
-function Skill(props) {
+function Skill({ skill }) {
   return (
-    <div style={{ backgroundColor: props.color }} className="skill">
-      <h1>{props.name}</h1>
+    <div style={{ backgroundColor: skill.color }} className="skill">
+      <h1>
+        {skill.skill}{" "}
+        {skill.level === "advanced"
+          ? "💪🏻"
+          : skill.level === "intermediate"
+          ? "👍🏻"
+          : "👼🏻"}
+      </h1>
     </div>
   );
 }
