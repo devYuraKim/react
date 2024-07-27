@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 
 const initialItems = [
   { id: 1, description: "passport", quantity: 2, packed: false },
@@ -21,7 +22,10 @@ export default App;
 function Logo() {
   return <h1>Far away🏝️</h1>;
 }
+
 function Form() {
+  const [description, setDescription] = useState("item");
+
   function handleSubmit(event) {
     event.preventDefault();
     console.log(event);
@@ -37,7 +41,7 @@ function Form() {
           </option>
         ))}
       </select>
-      <input type="text" placeholder="item..."></input>
+      <input type="text" value={description}></input>
       <button>add</button>
     </form>
   );
