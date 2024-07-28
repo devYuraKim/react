@@ -24,22 +24,40 @@ function Counter() {
     setCount((cur) => cur + step);
   }
 
+  function handleInput(event) {
+    setCount(Number(event.target.value));
+  }
+
+  function handleDrag(event) {
+    setStep(Number(event.target.value));
+  }
+
+  function handleClick() {
+    setCount(0);
+    setStep(1);
+  }
+
   return (
     <div>
       <div>
-        <input type="range" min="0" max="10"></input>
-        <div>
+        <input
+          type="range"
+          min="0"
+          max="10"
+          onChange={handleDrag}
+          defaultValue="1"
+        />{" "}
+        {step}
+        {/* <div>
           <button onClick={() => setStep((cur) => cur - 1)}>-</button>
           <span>step:{step}</span>
           <button onClick={() => setStep((cur) => cur + 1)}>+</button>
-        </div>
-
+        </div> */}
         <div>
           <button onClick={handleMinus}>-</button>
-          <span>count:{count}</span>
+          <input text="type" value={count} onChange={handleInput}></input>
           <button onClick={handlePlus}>+</button>
         </div>
-
         <p>
           {count === 0 && `today is ${date.toDateString()}`}
           {count > 0 && `${count} days from today is ${date.toDateString()}`}
@@ -47,6 +65,8 @@ function Counter() {
             `${count} days ago from today was ${date.toDateString()}`}
         </p>
       </div>
+
+      <button onClick={handleClick}>reset</button>
     </div>
   );
 }
