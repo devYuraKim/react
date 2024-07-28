@@ -1,6 +1,15 @@
 import { useState } from "react";
+import "./styles.css";
 
 function App() {
+  return (
+    <div className="App">
+      <Counter />
+    </div>
+  );
+}
+
+function Counter() {
   const [count, setCount] = useState(0);
   const [step, setStep] = useState(1);
 
