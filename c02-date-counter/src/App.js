@@ -45,8 +45,8 @@ function Counter() {
           min="0"
           max="10"
           onChange={handleDrag}
-          defaultValue="1"
-        />{" "}
+          value={step}
+        />
         {step}
         {/* <div>
           <button onClick={() => setStep((cur) => cur - 1)}>-</button>
@@ -66,7 +66,12 @@ function Counter() {
         </p>
       </div>
 
-      <button onClick={handleClick}>reset</button>
+      <button
+        onClick={handleClick}
+        disabled={count === 0 && step === 1 ? true : false}
+      >
+        reset
+      </button>
     </div>
   );
 }
