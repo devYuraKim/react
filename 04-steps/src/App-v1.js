@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import Button from "./Button";
 
 const messages = [
   "Learn React ⚛️",
@@ -29,6 +28,7 @@ function Steps() {
 
   return (
     <>
+      {" "}
       <button
         className="close"
         onClick={() => setIsOpen((curState) => !curState)}
@@ -49,12 +49,18 @@ function Steps() {
           </p>
 
           <div className="buttons">
-            <Button onClick={handlePrevious} bgColor="#7950F2" textColor="#fff">
-              <span>◀</span> Previous
-            </Button>
-            <Button onClick={handleNext} bgColor="#7950F2" textColor="#fff">
-              Next <span>▶</span>
-            </Button>
+            <button
+              style={{ backgroundColor: "#7950F2", color: "#fff" }}
+              onClick={handlePrevious}
+            >
+              Previous
+            </button>
+            <button
+              style={{ backgroundColor: "#7950F2", color: "#fff" }}
+              onClick={handleNext}
+            >
+              Next
+            </button>
           </div>
         </div>
       )}
