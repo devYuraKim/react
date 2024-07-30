@@ -25,7 +25,7 @@ export default function App() {
 }
 
 function Accordion({ data }) {
-  const [curOpen, setIsOpen] = useState(null);
+  const [curOpen, setCurOpen] = useState(null);
 
   return (
     <div className="accordion">
@@ -35,7 +35,7 @@ function Accordion({ data }) {
           text={el.text}
           num={i + 1}
           key={el.title}
-          onOpen={setIsOpen}
+          onOpen={setCurOpen}
           curOpen={curOpen}
         />
       ))}
