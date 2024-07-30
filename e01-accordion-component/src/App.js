@@ -19,34 +19,39 @@ const faqs = [
 export default function App() {
   return (
     <div>
-      {faqs.map((faq) => (
-        <Accordion faq={faq} />
+      <Accordion data={faqs} />
+    </div>
+  );
+}
+
+function Accordion({ data }) {
+  return (
+    <div className="accordion">
+      {data.map((el, i) => (
+        <AccordionItem
+          title={el.title}
+          text={el.text}
+          num={i + 1}
+          key={el.title}
+        />
       ))}
     </div>
   );
 }
 
-function Accordion({ faq }) {
-  const [clicked, setClicked] = useState(false);
+function AccordionItem({ num, title, text }) {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="accordion">
-      <div
-        className={`item ${clicked ? "open" : ""}`}
-        onClick={() => setClicked(!clicked)}
-      >
-        <div className="number">number</div>
-        <div className="title">{faq.title}</div>
-        <div className="icon"> {clicked ? "➖" : "➕"}</div>
+    <div
+      className={`item ${isOpen ? "open" : ""}`}
+      onClick={() => setIsOpen((isOpen) => !isOpen)}
+    >
+      <p className="number">{num < 10 ? `0${num}` : num}</p>
+      <p className="title">{title}</p>
+      <p className="icon"> {isOpen ? "➖" : "➕"}</p>
 
-        {clicked ? (
-          <>
-            <div className="content-box">{faq.text}</div>
-          </>
-        ) : (
-          ""
-        )}
-      </div>
+      {isOpen ? <div className="content-box">{text}</div> : ""}
     </div>
   );
 }
