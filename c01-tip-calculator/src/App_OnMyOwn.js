@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function App() {
+export default function App() {
   const [bill, setBill] = useState(0);
   const [totalTip, setTotalTip] = useState(0);
 
@@ -14,17 +14,6 @@ function App() {
       <Tip setTotalTip={setTotalTip} />
       <div>{bill + bill * totalTip}</div>
       <button>reset</button>
-    </div>
-  );
-}
-
-export default App;
-
-function Bill({ bill, onChange }) {
-  return (
-    <div>
-      How much was the bill?
-      <input type="text" value={bill} onChange={onChange}></input>
     </div>
   );
 }
@@ -65,6 +54,15 @@ function TipSeparate({ onChange, children }) {
         <option value={0.1}>10%</option>
         <option value={0.2}>20%</option>
       </select>
+    </div>
+  );
+}
+
+function Bill({ bill, onChange }) {
+  return (
+    <div>
+      How much was the bill?
+      <input type="text" value={bill} onChange={onChange}></input>
     </div>
   );
 }
