@@ -5,14 +5,14 @@ export default function App() {
   const [totalTip, setTotalTip] = useState(0);
 
   function handleChange(e) {
-    setBill(e.target.value);
+    setBill(Number(e.target.value));
   }
 
   return (
     <div>
       <Bill bill={bill} onChange={handleChange} />
       <Tip setTotalTip={setTotalTip} />
-      <div>{bill + bill * totalTip}</div>
+      <div>bill: {bill} | tip: {totalTip}</div>
       <button>reset</button>
     </div>
   );
