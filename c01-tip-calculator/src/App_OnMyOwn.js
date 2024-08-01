@@ -22,14 +22,14 @@ function Tip({ setTotalTip }) {
   const [tip1, setTip1] = useState(0);
   const [tip2, setTip2] = useState(0);
 
-  setTotalTip(Math.round((tip1 + tip2) / 2));
-
   function handleChange1(e) {
     setTip1(Number(e.target.value));
+    setTotalTip(Math.round((tip1 + tip2) / 2));
   }
 
   function handleChange2(e) {
-    setTip2(Number(e.target.value));
+    setTip2(Number(e.target.value)); 
+    setTotalTip(Math.round((tip1 + tip2) / 2));
   }
 
   return (
