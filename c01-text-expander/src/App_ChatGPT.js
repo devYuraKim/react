@@ -47,13 +47,21 @@ function TextExpander({
   const [isExpanded, setIsExpanded] = useState(expanded);
 
   function handleClick() {
-    setIsExpanded((prev) => !isExpanded);
+    // Correct syntax for setting state
+    setIsExpanded((prev) => !prev);
   }
+
+  // Split the children into words and get the first collapsedNumWords
+  const words = children.split(" ");
+  const previewText = words.slice(0, collapsedNumWords).join(" ");
 
   return (
     <div className={className}>
-      {isExpanded ? collapsedNumWords : children}
-      <span style={{ color: buttonColor }} onClick={handleClick}>
+      {isExpanded ? `${previewText}...` : children}
+      <span
+        style={{ color: buttonColor, cursor: "pointer" }}
+        onClick={handleClick}
+      >
         {isExpanded ? expandButtonText : collapseButtonText}
       </span>
     </div>
