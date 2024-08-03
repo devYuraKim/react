@@ -25,13 +25,15 @@ function Tip({ setTotalTip }) {
   const [tip2, setTip2] = useState(0);
 
   function handleChange1(e) {
-    setTip1(Number(e.target.value));
-    setTotalTip((tip1 + tip2) / 2);
+    const newTip1 = Number(e.target.value);
+    setTip1(newTip1);
+    setTotalTip((newTip1 + tip2) / 2);
   }
 
   function handleChange2(e) {
-    setTip2(Number(e.target.value));
-    setTotalTip((tip1 + tip2) / 2);
+    const newTip2 = Number(e.target.value);
+    setTip2(newTip2);
+    setTotalTip((newTip2 + tip1) / 2);
   }
 
   return (
