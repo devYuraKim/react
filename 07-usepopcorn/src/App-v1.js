@@ -60,19 +60,20 @@ export default function App() {
   const [query, setQuery] = useState("");
 
   useEffect(function () {
-    console.log("A");
+    console.log("after initial render ");
   }, []);
 
   useEffect(function () {
-    console.log("B");
+    console.log("after every render");
   });
 
-  console.log("C");
+  console.log("during render");
 
   useEffect(
     function () {
       async function fetchMovies() {
         try {
+          setError(null);
           setIsLoading(true);
           const res = await fetch(
             `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`
@@ -89,6 +90,11 @@ export default function App() {
         } finally {
           setIsLoading(false);
         }
+      }
+      if (!query.length) {
+        setMovies([]);
+        setError(null);
+        return;
       }
       fetchMovies();
     },
