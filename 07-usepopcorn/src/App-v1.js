@@ -57,32 +57,43 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [query, setQuery] = useState("sdfds");
+  const [query, setQuery] = useState("");
 
   useEffect(function () {
-    async function fetchMovies() {
-      try {
-        setIsLoading(true);
-        const res = await fetch(
-          `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`
-        );
-
-        if (!res.ok) throw new Error("Lost Connection");
-
-        if (data.Response === "False") throw new Error("No Result");
-
-        const data = await res.json();
-        setMovies(data.Search);
-        console.log(data);
-        setIsLoading(false);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchMovies();
+    console.log("A");
   }, []);
+
+  useEffect(function () {
+    console.log("B");
+  });
+
+  console.log("C");
+
+  useEffect(
+    function () {
+      async function fetchMovies() {
+        try {
+          setIsLoading(true);
+          const res = await fetch(
+            `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+          );
+          if (!res.ok) throw new Error("Lost Connection");
+
+          const data = await res.json();
+          if (data.Response === "False") throw new Error("No Result");
+
+          setMovies(data.Search);
+          setIsLoading(false);
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+      fetchMovies();
+    },
+    [query]
+  );
 
   return (
     <>
