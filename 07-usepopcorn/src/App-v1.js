@@ -59,6 +59,7 @@ export default function App() {
           setError(null);
         } catch (err) {
           if (err.name !== "AbortError") {
+            console.log(err.message);
             setError(err.message);
           }
         } finally {
@@ -70,6 +71,7 @@ export default function App() {
         setError(null);
         return;
       }
+      setSelectedId(null);
       fetchMovies();
       // with every keystroke, the component re-renders and calls on abort function to abort the current fetch request
       return function () {
@@ -301,6 +303,23 @@ function MovieDetails({ selectedId, setSelectedId, onAddWatched, watched }) {
 
   useEffect(
     function () {
+      function callBack(e) {
+        if (e.code === "Backspace") {
+          setSelectedId(null);
+        }
+      }
+
+      document.addEventListener("keydown", callBack);
+
+      return function () {
+        document.removeEventListener("keydown", callBack);
+      };
+    },
+    [setSelectedId]
+  );
+
+  useEffect(
+    function () {
       async function getMovieDetails() {
         setIsLoading(true);
         const res = await fetch(
@@ -320,6 +339,7 @@ function MovieDetails({ selectedId, setSelectedId, onAddWatched, watched }) {
       if (!title) return;
       document.title = `Movie | ${title}`;
       return function () {
+        // console.log("clean up effect");
         document.title = "usePopcorn";
       };
     },
