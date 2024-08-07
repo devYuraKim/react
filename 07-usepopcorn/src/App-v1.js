@@ -40,12 +40,14 @@ export default function App() {
 
   useEffect(
     function () {
+      const controller = new AbortController();
       async function fetchMovies() {
         try {
           setError(null);
           setIsLoading(true);
           const res = await fetch(
-            `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+            `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
+            { signal: controller.signal }
           );
           if (!res.ok) throw new Error("Lost Connection");
 
@@ -54,8 +56,11 @@ export default function App() {
 
           setMovies(data.Search);
           setIsLoading(false);
+          setError(null);
         } catch (err) {
-          setError(err.message);
+          if (err.name !== "AbortError") {
+            setError(err.message);
+          }
         } finally {
           setIsLoading(false);
         }
@@ -66,6 +71,10 @@ export default function App() {
         return;
       }
       fetchMovies();
+      // with every keystroke, the component re-renders and calls on abort function to abort the current fetch request
+      return function () {
+        controller.abort();
+      };
     },
     [query]
   );
