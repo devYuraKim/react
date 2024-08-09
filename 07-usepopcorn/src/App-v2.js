@@ -1,17 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import StarRating from "./StarRating.js";
+import { useMovies } from "./useMovies.js";
+
+const KEY = "d9c29e1c";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
-const KEY = "d9c29e1c";
-
 export default function App() {
   const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+  const { movies, isLoading, error } = useMovies(query);
+
   //const [watched, setWatched] = useState([]);
   const [watched, setWatched] = useState(function () {
     const storedValue = localStorage.getItem("watched");
@@ -36,49 +36,6 @@ export default function App() {
       localStorage.setItem("watched", JSON.stringify(watched));
     },
     [watched]
-  );
-
-  useEffect(
-    function () {
-      const controller = new AbortController();
-      async function fetchMovies() {
-        try {
-          setError(null);
-          setIsLoading(true);
-          const res = await fetch(
-            `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
-            { signal: controller.signal }
-          );
-          if (!res.ok) throw new Error("Lost Connection");
-
-          const data = await res.json();
-          if (data.Response === "False") throw new Error("No Result");
-
-          setMovies(data.Search);
-          setIsLoading(false);
-          setError(null);
-        } catch (err) {
-          if (err.name !== "AbortError") {
-            console.log(err.message);
-            setError(err.message);
-          }
-        } finally {
-          setIsLoading(false);
-        }
-      }
-      if (!query.length) {
-        setMovies([]);
-        setError(null);
-        return;
-      }
-      setSelectedId(null);
-      fetchMovies();
-      // with every keystroke, the component re-renders and calls on abort function to abort the current fetch request
-      return function () {
-        controller.abort();
-      };
-    },
-    [query]
   );
 
   return (
