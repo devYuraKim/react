@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import StarRating from "./StarRating.js";
 import { useMovies } from "./useMovies.js";
+import { useLocalStorageState } from "./useLocalStorageState.js";
+import { useKey } from "./useKey.js";
 
 const KEY = "d9c29e1c";
 
@@ -12,11 +14,9 @@ export default function App() {
   const [selectedId, setSelectedId] = useState(null);
   const { movies, isLoading, error } = useMovies(query);
 
+  const [watched, setWatched] = useLocalStorageState([], "watched");
+
   //const [watched, setWatched] = useState([]);
-  const [watched, setWatched] = useState(function () {
-    const storedValue = localStorage.getItem("watched");
-    return JSON.parse(storedValue);
-  });
 
   function handleSelectMovie(id) {
     setSelectedId((curId) => (id === curId ? null : id));
@@ -30,13 +30,6 @@ export default function App() {
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
-
-  useEffect(
-    function () {
-      localStorage.setItem("watched", JSON.stringify(watched));
-    },
-    [watched]
-  );
 
   return (
     <>
@@ -108,21 +101,26 @@ function Logo() {
 
 function Search({ query, setQuery }) {
   const inputEl = useRef(null);
+  useKey("Enter", function () {
+    if (document.activeElement === inputEl.current) return;
+    inputEl.current.focus();
+    setQuery("");
+  });
 
-  useEffect(
-    function () {
-      function callback(e) {
-        if (document.activeElement === inputEl.current) return;
-        if (e.code === "Enter") {
-          inputEl.current.focus();
-          setQuery("");
-        }
-      }
-      document.addEventListener("keydown", callback);
-      //console.log(inputEl.current);
-    },
-    [setQuery]
-  );
+  // useEffect(
+  //   function () {
+  //     function callback(e) {
+  //       if (document.activeElement === inputEl.current) return;
+  //       if (e.code === "Enter") {
+  //         inputEl.current.focus();
+  //         setQuery("");
+  //       }
+  //     }
+  //     document.addEventListener("keydown", callback);
+  //     //console.log(inputEl.current);
+  //   },
+  //   [setQuery]
+  // );
 
   return (
     <input
@@ -231,23 +229,7 @@ function MovieDetails({ selectedId, setSelectedId, onAddWatched, watched }) {
     onAddWatched(newWatchedMovie);
     setSelectedId(null);
   }
-
-  useEffect(
-    function () {
-      function callBack(e) {
-        if (e.code === "Backspace") {
-          setSelectedId(null);
-        }
-      }
-
-      document.addEventListener("keydown", callBack);
-
-      return function () {
-        document.removeEventListener("keydown", callBack);
-      };
-    },
-    [setSelectedId]
-  );
+  useKey("Backspace", () => setSelectedId(null));
 
   useEffect(
     function () {
