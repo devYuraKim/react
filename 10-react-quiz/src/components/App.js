@@ -26,6 +26,8 @@ function reducer(state, action) {
     case "setIndex":
       return { ...state, index: action.payload + 1 };
     case "newAnswer":
+      //state.answer, state.points는 global state properties
+      //question.correctOption, question.points는 questions의 특정 element에 해당하는 properties
       const question = state.questions.at(state.index);
 
       return {
