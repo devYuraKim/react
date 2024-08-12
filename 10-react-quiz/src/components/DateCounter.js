@@ -85,9 +85,7 @@ function DateCounter() {
       <p>{date.toDateString()}</p>
 
       <div>
-        <button onClic k={reset}>
-          Reset
-        </button>
+        <button onClick={reset}>Reset</button>
       </div>
     </div>
   );
