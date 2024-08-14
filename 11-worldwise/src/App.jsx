@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import Product from "./pages/Product";
@@ -42,10 +42,20 @@ function App() {
         <Route path="pricing" element={<Pricing />} />
         <Route path="/login" element={<Login />} />
         <Route path="app" element={<AppLayout />}>
-          <Route
+          {/* <Route
             index
             element={<CityList cities={cities} isLoading={isLoading} />}
-          />
+          /> */}
+          {/* Normally a call to navigate will push a new entry into the history
+          stack so the user can click the back button to get back to the page.
+          If you pass replace: true to navigate then the current entry in the
+          history stack will be replaced with the new one. You can better
+          understand this with the help of the below example. An example is when
+          the user clicks a “purchase” button but needs to log in first, after
+          they log in, you can replace the login screen with the checkout screen
+          you wanted them to be at. Then when they click the back button they
+          won’t see the login page again. */}
+          <Route index element={<Navigate replace to="cities" />} />
           <Route
             path="cities"
             element={<CityList cities={cities} isLoading={isLoading} />}
