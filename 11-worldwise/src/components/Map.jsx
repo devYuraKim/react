@@ -14,7 +14,7 @@ function Map() {
         navigate("form");
       }}
     >
-      <h1>Map</h1>
+      {/* <h1>Map</h1>
       <h1>latitude: {lat}</h1>
       <h1>longitude: {lng}</h1>
       <button
@@ -23,7 +23,7 @@ function Map() {
         }}
       >
         Change position
-      </button>
+      </button> */}
     </div>
   );
 }
