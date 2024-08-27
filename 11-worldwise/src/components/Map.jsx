@@ -23,17 +23,6 @@ function Map() {
 
   return (
     <div className={styles.mapContainer}>
-      {/* <h1>Map</h1>
-      <h1>latitude: {lat}</h1>
-      <h1>longitude: {lng}</h1>
-      <button
-        onClick={() => {
-          setSearchParams({ lat: 23, lng: 50 });
-        }}
-      >
-        Change position
-      </button> */}
-
       <MapContainer
         center={[mapLat, mapLng]}
         zoom={6}
