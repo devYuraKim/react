@@ -11,8 +11,11 @@ function createRandomPost() {
 // 1.Create a new context
 // 2.Provide a value to a child component
 // 3.Consume that value in a child component
+
+/*[1.CREATE A NEW CONTEXT OBJECT]*/
 const PostContext = createContext();
 
+/*[2.CREATE A CONTEXT PROVIDER COMPONENT: sets up context object details(value), state management and functions]*/
 function PostProvider({ children }) {
   //all the states and state updating logic
   const [posts, setPosts] = useState(() =>
@@ -53,6 +56,7 @@ function PostProvider({ children }) {
   );
 }
 
+/*[3.CREATE CUSTOM HOOK FOR CONSUMING CONTEXT]*/
 function usePosts() {
   const context = useContext(PostContext);
   if (context === undefined)
