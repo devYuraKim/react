@@ -8,7 +8,12 @@ function Map() {
   const navigate = useNavigate();
   const { cities } = useCities();
 
-  const [mapPosition, setMapPosition] = useState([40, 0]);
+  /*
+  1.default mapPosition이 [0,0]으로 설정됨
+  2.parameters에서 lat, lng을 확인
+  3. 
+  */
+  const [mapPosition, setMapPosition] = useState([0, 0]);
 
   const [searchParams] = useSearchParams();
   const mapLat = searchParams.get("lat");
@@ -24,7 +29,7 @@ function Map() {
   return (
     <div className={styles.mapContainer}>
       <MapContainer
-        center={[mapLat || 0, mapLng || 0]}
+        center={mapPosition}
         zoom={6}
         scrollWheelZoom={true}
         className={styles.map}
@@ -45,15 +50,15 @@ function Map() {
             </Popup>
           </Marker>
         ))}
-        <ChangeCenter position={[mapLat || 0, mapLng || 0]} />
+        <ChangeCenter position={mapPosition} />
       </MapContainer>
     </div>
   );
 }
 
 function ChangeCenter({ position }) {
-  const map = useMap();
-  map.setView(position);
+  const map = useMap(); //get leaflet map instance by useMap hook and create a reference
+  map.setView(position); //set view of the map to the new position
   return null;
 }
 
