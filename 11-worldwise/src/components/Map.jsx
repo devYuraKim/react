@@ -24,7 +24,7 @@ function Map() {
   return (
     <div className={styles.mapContainer}>
       <MapContainer
-        center={[mapLat, mapLng]}
+        center={[mapLat || 0, mapLng || 0]}
         zoom={6}
         scrollWheelZoom={true}
         className={styles.map}
@@ -45,7 +45,7 @@ function Map() {
             </Popup>
           </Marker>
         ))}
-        <ChangeCenter position={[mapLat || 40, mapLng || 0]} />
+        <ChangeCenter position={[mapLat || 0, mapLng || 0]} />
       </MapContainer>
     </div>
   );
@@ -54,7 +54,6 @@ function Map() {
 function ChangeCenter({ position }) {
   const map = useMap();
   map.setView(position);
-
   return null;
 }
 
