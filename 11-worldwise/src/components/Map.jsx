@@ -22,6 +22,8 @@ function Map() {
   useEffect(
     function () {
       if (mapLat && mapLng) setMapPosition([mapLat, mapLng]);
+      //This re-render passes the updated mapPosition as a prop to MapContainer.
+      //However, MapContainer does not automatically update the Leaflet map instance with the new center value because it does not reapply updated props to the Leaflet map instance.
     },
     [mapLat, mapLng]
   );
@@ -56,6 +58,9 @@ function Map() {
   );
 }
 
+//*****USING COMPONENT INSTEAD OF FUNCTION*****/
+//To ensure the map’s center updates to reflect the new state, you use the ChangeCenter component.
+//With map.setView(position), you manually set the map’s view to the new position whenever position changes.
 function ChangeCenter({ position }) {
   const map = useMap(); //get leaflet map instance by useMap hook and create a reference
   map.setView(position); //set view of the map to the new position
