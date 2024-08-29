@@ -4,6 +4,7 @@ import styles from "./Form.module.css";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { useUrlPosition } from "../hooks/useUrlPosition";
+import Message from "./Message";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -26,21 +27,27 @@ function Form() {
   const [lat, lng] = useUrlPosition();
   const [isLoadingGeocoding, setIsLoadingGeocoding] = useState(false);
   const [emoji, setEmoji] = useState(null);
+  const [geocodingError, setGeocodingError] = useState("");
 
   useEffect(
     function () {
       async function fetchCityData() {
         try {
           setIsLoadingGeocoding(true);
+          setGeocodingError("");
           const res = await fetch(
             `${BASE_URL}?latitude=${lat}&longitude=${lng}`
           );
           const data = await res.json();
           console.log(data);
+
+          if (!data.countryCode) throw new Error("that is not a valid city");
+
           setCityName(data.city || data.locality || "");
           setCountry(data.countryName);
           setEmoji(convertToEmoji(data.countryCode));
         } catch (err) {
+          setGeocodingError(err.message);
         } finally {
           setIsLoadingGeocoding(false);
         }
@@ -50,6 +57,7 @@ function Form() {
     [lat, lng]
   );
 
+  if (geocodingError) return <Message message={geocodingError} />;
   return (
     <form className={styles.form}>
       <div className={styles.row}>
