@@ -22,7 +22,7 @@ function Map() {
   2.parameters에서 lat, lng을 확인
   3. 
   */
-  const [mapPosition, setMapPosition] = useState([0, 0]);
+  const [mapPosition, setMapPosition] = useState([37, 126]);
   const {
     isLoading: isLoadingPosition,
     position: geolocationPosition,

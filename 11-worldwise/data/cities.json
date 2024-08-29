@@ -10,7 +10,7 @@
         "lat": 38.727881642324164,
         "lng": -9.140900099907554
       },
-      "id": 73930385
+      "id": "73930385"
     },
     {
       "cityName": "Madrid",
@@ -22,7 +22,7 @@
         "lat": 40.46635901755316,
         "lng": -3.7133789062500004
       },
-      "id": 17806751
+      "id": "17806751"
     },
     {
       "cityName": "Berlin",
@@ -34,7 +34,79 @@
         "lat": 52.53586782505711,
         "lng": 13.376933665713324
       },
-      "id": 98443197
+      "id": "98443197"
+    },
+    {
+      "id": "6a79",
+      "cityName": "Tokyo",
+      "country": "Japan",
+      "emoji": "🇯🇵",
+      "date": "2024-08-23T06:08:54.000Z",
+      "notes": "it was better than expected",
+      "position": {
+        "lat": "35.67514743608467",
+        "lng": "139.76806640625003"
+      }
+    },
+    {
+      "id": "fd32",
+      "cityName": "Kuta",
+      "country": "Indonesia",
+      "emoji": "🇮🇩",
+      "date": "2023-12-19T06:15:10.000Z",
+      "notes": "Loved it - cheap food, nice beach",
+      "position": {
+        "lat": "-8.727690321614553",
+        "lng": "115.17268180847168"
+      }
+    },
+    {
+      "id": "1df5",
+      "cityName": "Seoul",
+      "country": "Korea (the Republic of)",
+      "emoji": "🇰🇷",
+      "date": "2024-08-29T06:17:03.627Z",
+      "notes": "",
+      "position": {
+        "lat": "37.54457732085584",
+        "lng": "127.00195312500001"
+      }
+    },
+    {
+      "id": "3935",
+      "cityName": "Pyongyang",
+      "country": "Korea (the Democratic People's Republic of)",
+      "emoji": "🇰🇵",
+      "date": "2024-08-29T06:27:46.710Z",
+      "notes": "???",
+      "position": {
+        "lat": "38.976492485539424",
+        "lng": "125.72753906250001"
+      }
+    },
+    {
+      "id": "d9b6",
+      "cityName": "Singapore",
+      "country": "Singapore",
+      "emoji": "🇸🇬",
+      "date": "2024-08-29T06:29:46.676Z",
+      "notes": "",
+      "position": {
+        "lat": "1.2873519967765423",
+        "lng": "103.83934020996095"
+      }
+    },
+    {
+      "id": "f25c",
+      "cityName": "Singapore",
+      "country": "Singapore",
+      "emoji": "🇸🇬",
+      "date": "2024-08-29T06:30:30.305Z",
+      "notes": "",
+      "position": {
+        "lat": "1.3340316734680562",
+        "lng": "103.87779235839845"
+      }
     }
   ]
 }
