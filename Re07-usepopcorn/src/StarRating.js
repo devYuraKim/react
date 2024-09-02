@@ -12,19 +12,28 @@ const starContainerStyle = {
 
 function StarRating({ maxRating = 5 }) {
   const [rating, setRating] = useState(0);
+  const [tempRating, setTempRating] = useState(0);
+  const [isFixed, setIsFixed] = useState(false);
 
   function handleRating(i) {
     setRating(i + 1);
+    setIsFixed(true);
   }
 
   return (
     <div style={containerStyle}>
       <div style={starContainerStyle}>
         {Array.from({ length: maxRating }, (_, i) => (
-          <Star key={i} onClick={() => handleRating(i)} isFilled={rating > i} />
+          <Star
+            key={i}
+            onClick={() => handleRating(i)}
+            isFilled={tempRating ? tempRating > i : rating > i}
+            onMouseEnter={() => setTempRating(i + 1)}
+            onMouseLeave={() => setTempRating(0)}
+          />
         ))}
       </div>
-      <p>{rating || ""}</p>
+      <p>{tempRating ? tempRating : isFixed ? rating : ""}</p>
     </div>
   );
 }
@@ -43,9 +52,15 @@ const starStyle = {
   cursor: "pointer",
 };
 
-function Star({ onClick, isFilled }) {
+function Star({ onClick, isFilled, onMouseEnter, onMouseLeave }) {
   return (
-    <span role="button" style={starStyle} onClick={onClick}>
+    <span
+      role="button"
+      style={starStyle}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       {isFilled ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
