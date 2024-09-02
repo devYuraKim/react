@@ -37,12 +37,12 @@ function StarRating({ maxRating = 5 }) {
   );
 }
 
-export default StarRating;
-
 // 1. Array.from()으로 array object를 생성
 // 2. {length:5}는 길이만 5의 값을 가진 객체를 생성
 // 3. (_, i)가 될 수밖에 없는 것이 2에서 생성한 객체는 element가 없고 length만 있어서 index만 정의 가능하기 때문
 // 결론. Array.from(source, (element, index) => processResult)
+
+export default StarRating;
 
 const starStyle = {
   width: "48px",
@@ -50,6 +50,8 @@ const starStyle = {
   display: "block",
   cursor: "pointer",
 };
+
+// props를 통해서 styles customization이 가능하게 하려면 starStyle 객체를 Star component 내부로 이동시켜야 함
 
 function Star({ onClick, isFilled, onMouseEnter, onMouseLeave }) {
   return (
