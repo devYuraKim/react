@@ -13,11 +13,9 @@ const starContainerStyle = {
 function StarRating({ maxRating = 5 }) {
   const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
-  const [isFixed, setIsFixed] = useState(false);
 
   function handleRating(i) {
     setRating(i + 1);
-    setIsFixed(true);
   }
 
   return (
@@ -33,7 +31,8 @@ function StarRating({ maxRating = 5 }) {
           />
         ))}
       </div>
-      <p>{tempRating ? tempRating : isFixed ? rating : ""}</p>
+      <p>{tempRating || rating || ""}</p>
+      {/* if truthy then return, if not proceed */}
     </div>
   );
 }
