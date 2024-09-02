@@ -10,12 +10,13 @@ const starContainerStyle = {
   display: "flex",
 };
 
-function StarRating({ maxRating = 5 }) {
+function StarRating({ maxRating = 5, onSetExternalRating }) {
   const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
 
   function handleRating(i) {
     setRating(i + 1);
+    onSetExternalRating(i + 1);
   }
 
   return (
