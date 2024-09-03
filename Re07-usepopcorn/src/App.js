@@ -251,7 +251,7 @@ function MovieDetails({
   function handleUpdate(updatedUserRating) {
     const updatedWatched = watched.map((movie) =>
       movie.imdbID === selectedId
-        ? { ...movie, userRating: Number(updatedUserRating) }
+        ? { ...movie, userRating: updatedUserRating }
         : movie
     );
     setWatched(updatedWatched);
