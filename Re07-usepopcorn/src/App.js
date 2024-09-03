@@ -336,7 +336,7 @@ function MovieDetails({
               {isWatched ? (
                 <>
                   <p>
-                    You have already rated this movie ⭐️{watchedUserRating}
+                    You rated this movie ⭐️{watchedUserRating}
                     {!isUpdating && (
                       <span>
                         <button
