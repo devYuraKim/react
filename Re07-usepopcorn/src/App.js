@@ -255,6 +255,19 @@ function MovieDetails({
         : movie
     );
     setWatched(updatedWatched);
+
+    /* 사실 이게 Recommended (Functional Update)
+    만약에 setWatched 함수 안에서 state를 업데이트하려면 아래처럼 현재 state를 인자로 받아서 수행해야 한다.
+
+    setWatched((curWatched) =>
+      curWatched.map((movie) =>
+        movie.imdbID === selectedId
+          ? { ...movie, userRating: updatedUserRating }
+          : movie
+      )
+    );
+    */
+
     setIsUpdating(false);
   }
 
