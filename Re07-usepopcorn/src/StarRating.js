@@ -52,14 +52,13 @@ function StarRating({ maxRating = 5, onSetExternalRating }) {
 export default StarRating;
 
 const starStyle = {
-  width: "48px",
-  height: "48px",
+  width: "20px",
+  height: "20px",
   display: "block",
   cursor: "pointer",
 };
 
 // props를 통해서 styles customization이 가능하게 하려면 starStyle 객체를 Star component 내부로 이동시켜야 함
-
 function Star({ onClick, isFilled, onMouseEnter, onMouseLeave }) {
   return (
     <span
