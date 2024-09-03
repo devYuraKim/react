@@ -14,16 +14,6 @@ export default function App() {
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
-  // useEffect(function () {
-  //   console.log("after initial render ");
-  // }, []);
-
-  // useEffect(function () {
-  //   console.log("after every render");
-  // });
-
-  // console.log("during render");
-
   function handleSelectMovie(id) {
     setSelectedId((curId) => (id === curId ? null : id));
   }
@@ -88,23 +78,7 @@ export default function App() {
         <NumResults movies={movies} />
       </NavBar>
       <Main>
-        {/* <Box element={<MovieList movies={movies} />} />
-        <Box
-          element={
-            <>
-              <WatchedSummary watched={watched} />
-              <WatchedMovieList watched={watched} />
-            </>
-          }
-        /> */}
         <Box>
-          {/* {isLoading ? (
-            <Loader />
-          ) : error ? (
-            <ErrorMessage />
-          ) : (
-            <MovieList movies={movies} />
-          )} */}
           {isLoading && <Loader />}
           {!isLoading && !error && (
             <MovieList movies={movies} setSelectedId={handleSelectMovie} />
@@ -189,21 +163,6 @@ function Main({ children }) {
   return <main className="main">{children}</main>;
 }
 
-// function ListBox({ children }) {
-//   const [isOpen1, setIsOpen1] = useState(true);
-//   return (
-//     <div className="box">
-//       <button
-//         className="btn-toggle"
-//         onClick={() => setIsOpen1((open) => !open)}
-//       >
-//         {isOpen1 ? "–" : "+"}
-//       </button>
-//       {isOpen1 && children}
-//     </div>
-//   );
-// }
-
 function Box({ children }) {
   const [isOpen, setIsOpen] = useState(true);
   return (
@@ -240,28 +199,6 @@ function Movie({ movie, setSelectedId }) {
     </li>
   );
 }
-
-// function WatchedBox() {
-//   const [watched, setWatched] = useState(tempWatchedData);
-//   const [isOpen2, setIsOpen2] = useState(true);
-
-//   return (
-//     <div className="box">
-//       <button
-//         className="btn-toggle"
-//         onClick={() => setIsOpen2((open) => !open)}
-//       >
-//         {isOpen2 ? "–" : "+"}
-//       </button>
-//       {isOpen2 && (
-//         <>
-//           <WatchedSummary watched={watched} />
-//           <WatchedMovieList watched={watched} />
-//         </>
-//       )}
-//     </div>
-//   );
-// }
 
 function MovieDetails({ selectedId, setSelectedId, onAddWatched, watched }) {
   const [movie, setMovie] = useState({});
@@ -475,74 +412,3 @@ function WatchedMovie({ movie, onDeleteWatched }) {
     </li>
   );
 }
-
-/*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
-
-const tempMovieData = [
-  {
-    imdbID: "tt1375666",
-    Title: "Inception",
-    Year: "2010",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
-  },
-  {
-    imdbID: "tt0133093",
-    Title: "The Matrix",
-    Year: "1999",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
-  },
-  {
-    imdbID: "tt6751668",
-    Title: "Parasite",
-    Year: "2019",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BYWZjMjk3ZTItODQ2ZC00NTY5LWE0ZDYtZTI3MjcwN2Q5NTVkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_SX300.jpg",
-  },
-];
-
-const tempWatchedData = [
-  {
-    imdbID: "tt1375666",
-    Title: "Inception",
-    Year: "2010",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
-    runtime: 148,
-    imdbRating: 8.8,
-    userRating: 10,
-  },
-  {
-    imdbID: "tt0088763",
-    Title: "Back to the Future",
-    Year: "1985",
-    Poster:
-      "https://m.media-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
-    runtime: 116,
-    imdbRating: 8.5,
-    userRating: 9,
-  },
-];
