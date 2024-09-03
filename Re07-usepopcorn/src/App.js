@@ -97,6 +97,7 @@ export default function App() {
             <>
               <WatchedSummary watched={watched} />
               <WatchedMovieList
+                setSelectedId={setSelectedId}
                 watched={watched}
                 onDeleteWatched={handleDeleteWatched}
               />
@@ -204,6 +205,7 @@ function MovieDetails({ selectedId, setSelectedId, onAddWatched, watched }) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [userRating, setUserRating] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
 
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
   const watchedUserRating = watched.find(
@@ -236,6 +238,18 @@ function MovieDetails({ selectedId, setSelectedId, onAddWatched, watched }) {
 
     onAddWatched(newWatchedMovie);
     setSelectedId(null);
+  }
+
+  function handleRatingUpdate(rating) {
+    setUserRating(rating);
+  } // Function to handle rating update
+
+  function handleUpdateUserRating() {
+    setIsEditing(true); // Enable editing mode
+  }
+  function handleCancelEdit() {
+    setIsEditing(false); // Disable editing mode
+    setUserRating(watchedUserRating); // Revert to previous rating if needed
   }
 
   useEffect(
@@ -310,7 +324,31 @@ function MovieDetails({ selectedId, setSelectedId, onAddWatched, watched }) {
           <section>
             <div className="rating">
               {isWatched ? (
-                <p>You have already rated this movie ⭐️{watchedUserRating}</p>
+                <>
+                  <p>
+                    You have already rated this movie ⭐️{watchedUserRating}
+                    <span>
+                      <button
+                        className="btn-change"
+                        onClick={handleUpdateUserRating}
+                      >
+                        change
+                      </button>
+                    </span>
+                  </p>
+                  {isEditing && (
+                    <>
+                      <StarRating
+                        size={24}
+                        maxRating={10}
+                        onSetExternalRating={setUserRating}
+                      />
+                      <button className="btn-cancel" onClick={handleCancelEdit}>
+                        Cancel
+                      </button>
+                    </>
+                  )}
+                </>
               ) : (
                 <>
                   <StarRating
@@ -369,11 +407,12 @@ function WatchedSummary({ watched }) {
   );
 }
 
-function WatchedMovieList({ watched, onDeleteWatched }) {
+function WatchedMovieList({ watched, onDeleteWatched, setSelectedId }) {
   return (
-    <ul className="list">
+    <ul className="list list-watched-movies">
       {watched.map((movie) => (
         <WatchedMovie
+          setSelectedId={setSelectedId}
           movie={movie}
           key={movie.imdbID}
           onDeleteWatched={onDeleteWatched}
@@ -383,9 +422,9 @@ function WatchedMovieList({ watched, onDeleteWatched }) {
   );
 }
 
-function WatchedMovie({ movie, onDeleteWatched }) {
+function WatchedMovie({ movie, onDeleteWatched, setSelectedId }) {
   return (
-    <li>
+    <li onClick={() => setSelectedId(movie.imdbID)}>
       <img src={movie.poster} alt={`${movie.title} poster`} />
       <h3>{movie.title}</h3>
       <div>
