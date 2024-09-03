@@ -92,6 +92,7 @@ export default function App() {
               setSelectedId={setSelectedId}
               onAddWatched={handleAddWatched}
               watched={watched}
+              setWatched={setWatched}
             />
           ) : (
             <>
@@ -201,11 +202,18 @@ function Movie({ movie, setSelectedId }) {
   );
 }
 
-function MovieDetails({ selectedId, setSelectedId, onAddWatched, watched }) {
+function MovieDetails({
+  selectedId,
+  setSelectedId,
+  onAddWatched,
+  watched,
+  setWatched,
+}) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [userRating, setUserRating] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
+  const [updatedUserRating, setUpdatedUserRating] = useState("");
+  const [isUpdating, setIsUpdating] = useState(false);
 
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
   const watchedUserRating = watched.find(
@@ -240,16 +248,18 @@ function MovieDetails({ selectedId, setSelectedId, onAddWatched, watched }) {
     setSelectedId(null);
   }
 
-  function handleRatingUpdate(rating) {
-    setUserRating(rating);
-  } // Function to handle rating update
-
-  function handleUpdateUserRating() {
-    setIsEditing(true); // Enable editing mode
+  function handleUpdate(updatedUserRating) {
+    const updatedWatched = watched.map((movie) =>
+      movie.imdbID === selectedId
+        ? { ...movie, userRating: Number(updatedUserRating) }
+        : movie
+    );
+    setWatched(updatedWatched);
+    setIsUpdating(false);
   }
-  function handleCancelEdit() {
-    setIsEditing(false); // Disable editing mode
-    setUserRating(watchedUserRating); // Revert to previous rating if needed
+
+  function handleCancelUpdate() {
+    setIsUpdating(false);
   }
 
   useEffect(
@@ -327,24 +337,37 @@ function MovieDetails({ selectedId, setSelectedId, onAddWatched, watched }) {
                 <>
                   <p>
                     You have already rated this movie ⭐️{watchedUserRating}
-                    <span>
-                      <button
-                        className="btn-change"
-                        onClick={handleUpdateUserRating}
-                      >
-                        change
-                      </button>
-                    </span>
+                    {!isUpdating && (
+                      <span>
+                        <button
+                          className="btn-change"
+                          onClick={() => setIsUpdating(true)}
+                        >
+                          update
+                        </button>
+                      </span>
+                    )}
                   </p>
-                  {isEditing && (
+                  {isUpdating && (
                     <>
                       <StarRating
                         size={24}
                         maxRating={10}
-                        onSetExternalRating={setUserRating}
+                        onSetExternalRating={setUpdatedUserRating}
                       />
-                      <button className="btn-cancel" onClick={handleCancelEdit}>
-                        Cancel
+                      {updatedUserRating && (
+                        <button
+                          className="btn-change"
+                          onClick={() => handleUpdate(updatedUserRating)}
+                        >
+                          save
+                        </button>
+                      )}
+                      <button
+                        className="btn-cancel"
+                        onClick={handleCancelUpdate}
+                      >
+                        cancel
                       </button>
                     </>
                   )}
