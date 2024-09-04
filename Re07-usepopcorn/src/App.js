@@ -19,8 +19,6 @@ export default function App() {
   }
 
   function handleAddWatched(movie) {
-    //watched.map((movie)=>movie.imdbID).includes(movie.imdbID)
-    /*!watched.filter((element) => element.imdbID === movie.imdbID).length > 0 && */
     setWatched((watched) => [...watched, movie]);
   }
 
@@ -63,7 +61,7 @@ export default function App() {
       }
       setSelectedId(null);
       fetchMovies();
-      // with every keystroke, the component re-renders and calls on abort function to abort the current fetch request
+
       return function () {
         controller.abort();
       };
@@ -278,7 +276,7 @@ function MovieDetails({
   useEffect(
     function () {
       function callBack(e) {
-        if (e.code === "Backspace") {
+        if (e.code === "Backspace" || "Escape") {
           setSelectedId(null);
         }
       }
@@ -313,7 +311,6 @@ function MovieDetails({
       if (!title) return;
       document.title = `Movie | ${title}`;
       return function () {
-        // console.log("clean up effect");
         document.title = "usePopcorn";
       };
     },
