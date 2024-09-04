@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import useMovies from "./hooks/useMovies";
 import StarRating from "./StarRating.js";
+import useMovies from "./hooks/useMovies.js";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
