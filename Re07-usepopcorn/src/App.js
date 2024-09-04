@@ -520,7 +520,10 @@ function WatchedMovie({ movie, onDeleteWatched, setSelectedId }) {
 
         <button
           className="btn-delete"
-          onClick={() => onDeleteWatched(movie.imdbID)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onDeleteWatched(movie.imdbID);
+          }}
         >
           X
         </button>
