@@ -13,11 +13,14 @@ export default function App() {
 
   useEffect(
     function () {
+      const controller = new AbortController();
+
       async function fetchData() {
         setIsLoading(true);
         const host = "api.frankfurter.app";
         const res = await fetch(
-          `https://${host}/latest?amount=${amount}&from=${from}&to=${to}`
+          `https://${host}/latest?amount=${amount}&from=${from}&to=${to}`,
+          { signal: controller.signal }
         );
         const data = await res.json();
         const rates = data.rates[to];
@@ -35,8 +38,11 @@ export default function App() {
         return;
       }
       fetchData();
+      return () => {
+        controller.abort();
+      };
     },
-    [amount, from, to, result]
+    [amount, from, to]
   );
 
   return (
