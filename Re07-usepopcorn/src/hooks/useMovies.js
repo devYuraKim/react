@@ -6,7 +6,6 @@ export default function useMovies(query, setSelectedId) {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
   useEffect(
     function () {
       const controller = new AbortController();
@@ -19,10 +18,8 @@ export default function useMovies(query, setSelectedId) {
             { signal: controller.signal }
           );
           if (!res.ok) throw new Error("Lost Connection");
-
           const data = await res.json();
           if (data.Response === "False") throw new Error("No Result");
-
           setMovies(data.Search);
           setIsLoading(false);
           setError(null);
@@ -50,5 +47,5 @@ export default function useMovies(query, setSelectedId) {
     [query, setSelectedId]
   );
 
-  return [movies, isLoading, error];
+  return { movies, isLoading, error };
 }

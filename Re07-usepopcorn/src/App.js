@@ -9,11 +9,11 @@ const KEY = "d9c29e1c";
 
 export default function App() {
   const [query, setQuery] = useState("");
+  const [selectedId, setSelectedId] = useState(null);
   const [watched, setWatched] = useState(function () {
     const storedValue = localStorage.getItem("watched");
     return storedValue ? JSON.parse(storedValue) : [];
   });
-  const [selectedId, setSelectedId] = useState(null);
 
   const { movies, isLoading, error } = useMovies(query, setSelectedId);
 
