@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import StarRating from "./StarRating.js";
 import useMovies from "./hooks/useMovies.js";
 import useLocalStorageState from "./hooks/useLocalStorageState.js";
+import useKey from "./hooks/useKey.js";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
@@ -101,26 +102,11 @@ function Logo() {
 function Search({ query, setQuery }) {
   const inputEl = useRef(null);
 
-  useEffect(
-    function () {
-      function callback(e) {
-        //입력을 하던 중에 Enter key를 누르더라도 아무런 반응 하지 않도록 설정
-        if (document.activeElement === inputEl.current) return;
-
-        if (e.code === "Enter") {
-          inputEl.current.focus();
-          setQuery("");
-        }
-      }
-
-      document.addEventListener("keydown", callback);
-
-      return function () {
-        document.removeEventListener("keydown", callback);
-      };
-    },
-    [setQuery]
-  );
+  useKey("Enter", () => {
+    if (document.activeElement === inputEl.current) return;
+    inputEl.current.focus();
+    setQuery("");
+  });
 
   return (
     <input
@@ -266,22 +252,7 @@ function MovieDetails({
     setIsUpdating(false);
   }
 
-  useEffect(
-    function () {
-      function callBack(e) {
-        if (e.code === "Backspace" || "Escape") {
-          setSelectedId(null);
-        }
-      }
-
-      document.addEventListener("keydown", callBack);
-
-      return function () {
-        document.removeEventListener("keydown", callBack);
-      };
-    },
-    [setSelectedId]
-  );
+  useKey("Backspace", () => setSelectedId(null));
 
   useEffect(
     function () {
