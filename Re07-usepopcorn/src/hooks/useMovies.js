@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 
 const KEY = "d9c29e1c";
 
-export default function useMovies(query, setSelectedId) {
+export default function useMovies(query, setSelectedId, callback) {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   useEffect(
     function () {
+      //만약 callback 함수가 있으면 이걸 실행해라
+      callback?.();
       const controller = new AbortController();
       async function fetchMovies() {
         try {
@@ -44,7 +46,7 @@ export default function useMovies(query, setSelectedId) {
         controller.abort();
       };
     },
-    [query, setSelectedId]
+    [query, setSelectedId, callback]
   );
 
   return { movies, isLoading, error };
