@@ -32,7 +32,6 @@ export default function App() {
   useEffect(
     function () {
       localStorage.setItem("watched", JSON.stringify(watched));
-      console.log(localStorage.getItem("watched"));
     },
     [watched]
   );
@@ -153,9 +152,26 @@ function Logo() {
 function Search({ query, setQuery }) {
   const inputEl = useRef(null);
 
-  useEffect(function () {
-    inputEl.current.focus();
-  }, []);
+  useEffect(
+    function () {
+      function callback(e) {
+        //입력을 하던 중에 Enter key를 누르더라도 아무런 반응 하지 않도록 설정
+        if (document.activeElement === inputEl.current) return;
+
+        if (e.code === "Enter") {
+          inputEl.current.focus();
+          setQuery("");
+        }
+      }
+
+      document.addEventListener("keydown", callback);
+
+      return function () {
+        document.removeEventListener("keydown", callback);
+      };
+    },
+    [setQuery]
+  );
 
   return (
     <input
