@@ -247,6 +247,15 @@ function MovieDetails({
   const [updatedUserRating, setUpdatedUserRating] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
 
+  const countRef = useRef(1);
+  useEffect(
+    function () {
+      //처음 별점 설정할 때를 1회로 산정
+      if (userRating) countRef.current += 1;
+    },
+    [userRating]
+  );
+
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
   const watchedUserRating = watched.find(
     (movie) => movie.imdbID === selectedId
@@ -274,6 +283,7 @@ function MovieDetails({
       imdbRating: Number(imdbRating),
       runtime: Number(runtime.split(" ").at(0)),
       userRating,
+      countRatingDecisions: countRef.current,
     };
 
     onAddWatched(newWatchedMovie);
