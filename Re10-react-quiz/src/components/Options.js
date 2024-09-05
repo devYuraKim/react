@@ -1,22 +1,21 @@
-import { useState } from "react";
-
-function Options({ question }) {
-  const [selectedOption, setSelectedOption] = useState(null);
+function Options({ question, dispatch, answer }) {
+  const hasAnswered = answer !== null;
 
   return (
     <div className="options">
       {question.options.map((option, i) => (
         <button
-          className={`btn btn-option ${
-            selectedOption !== null
+          className={`btn btn-option ${i === answer ? "answer" : ""} ${
+            hasAnswered
               ? i === question.correctOption
                 ? "correct"
                 : "wrong"
               : ""
           }`}
           key={i}
+          disabled={hasAnswered}
           onClick={() => {
-            setSelectedOption(i);
+            dispatch({ type: "newAnswer", payload: i });
           }}
         >
           {option}

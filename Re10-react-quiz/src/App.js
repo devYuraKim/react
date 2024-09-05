@@ -12,6 +12,7 @@ const initialState = {
   //loading, error, ready, active, finished
   status: "loading",
   index: 0,
+  answer: null,
 };
 
 function reducer(state, action) {
@@ -22,6 +23,8 @@ function reducer(state, action) {
       return { ...state, status: "error" };
     case "start":
       return { ...state, status: "active" };
+    case "newAnswer":
+      return { ...state, answer: action.payload };
     default:
       throw new Error("Action unknown");
   }
@@ -30,7 +33,7 @@ function reducer(state, action) {
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { questions, status, index } = state;
+  const { questions, status, index, answer } = state;
 
   useEffect(function () {
     const controller = new AbortController();
@@ -62,7 +65,13 @@ function App() {
         {status === "ready" && (
           <StartScreen questions={questions} dispatch={dispatch} />
         )}
-        {status === "active" && <Question question={questions[index]} />}
+        {status === "active" && (
+          <Question
+            question={questions[index]}
+            dispatch={dispatch}
+            answer={answer}
+          />
+        )}
       </Main>
     </div>
   );
