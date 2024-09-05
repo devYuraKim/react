@@ -1,7 +1,10 @@
+import Options from "./Options";
+
 function Question({ question }) {
   return (
     <div>
-      <p>{question.id}</p>
+      <h4>{question.question}</h4>
+      <Options question={question} />
     </div>
   );
 }
