@@ -1,5 +1,4 @@
-function Question({ questions, index }) {
-  const question = questions[index];
+function Question({ question }) {
   return (
     <div>
       <p>{question.id}</p>
