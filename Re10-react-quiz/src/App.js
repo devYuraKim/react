@@ -34,6 +34,8 @@ function reducer(state, action) {
             ? state.points + question.points
             : state.points,
       };
+    case "nextQuestion":
+      return { ...state, answer: null, index: state.index + 1 };
     default:
       throw new Error("Action unknown");
   }
