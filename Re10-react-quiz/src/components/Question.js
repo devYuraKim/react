@@ -1,7 +1,8 @@
 function Question({ questions, index }) {
+  const question = questions[index];
   return (
     <div>
-      <p>{questions[index]}</p>
+      <p>{question.id}</p>
     </div>
   );
 }
