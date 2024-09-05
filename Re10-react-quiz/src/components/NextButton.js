@@ -1,4 +1,5 @@
-function NextButton({ dispatch }) {
+function NextButton({ dispatch, answer }) {
+  if (answer === null) return;
   return (
     <div
       className="btn btn-ui"

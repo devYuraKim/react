@@ -6,6 +6,8 @@ import Loader from "./components/Loader";
 import Error from "./components/Error";
 import StartScreen from "./components/StartScreen";
 import Question from "./components/Question";
+import NextButton from "./components/NextButton";
+import Progress from "./components/Progress";
 
 const initialState = {
   questions: [],
@@ -46,6 +48,12 @@ function App() {
 
   const { questions, status, index, answer, points } = state;
 
+  const numQuestions = questions.length;
+  const totalPoints = questions.reduce(
+    (acc, question) => acc + question.points,
+    0
+  );
+
   useEffect(function () {
     const controller = new AbortController();
 
@@ -74,15 +82,25 @@ function App() {
         {status === "loading" && <Loader />}
         {status === "error" && <Error />}
         {status === "ready" && (
-          <StartScreen questions={questions} dispatch={dispatch} />
+          <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
         )}
         {status === "active" && (
-          <Question
-            question={questions[index]}
-            dispatch={dispatch}
-            answer={answer}
-            points={points}
-          />
+          <>
+            <Progress
+              index={index}
+              numQuestions={numQuestions}
+              points={points}
+              totalPoints={totalPoints}
+              answer={answer}
+            />
+            <Question
+              question={questions[index]}
+              dispatch={dispatch}
+              answer={answer}
+              points={points}
+            />
+            <NextButton dispatch={dispatch} answer={answer} />
+          </>
         )}
       </Main>
     </div>
