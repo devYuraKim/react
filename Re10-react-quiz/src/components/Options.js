@@ -1,19 +1,23 @@
 import { useState } from "react";
 
 function Options({ question }) {
-  const [result, setResult] = useState("");
+  const [selectedOption, setSelectedOption] = useState(null);
 
   return (
     <div className="options">
       {question.options.map((option, i) => (
         <button
-          className={`btn btn-option ${result}`}
+          className={`btn btn-option ${
+            selectedOption !== null
+              ? i === question.correctOption
+                ? "correct"
+                : "wrong"
+              : ""
+          }`}
           key={i}
-          onClick={() =>
-            i === question.correctOption
-              ? setResult("correct")
-              : setResult("wrong")
-          }
+          onClick={() => {
+            setSelectedOption(i);
+          }}
         >
           {option}
         </button>
