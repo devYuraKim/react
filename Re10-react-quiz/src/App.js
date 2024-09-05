@@ -23,6 +23,8 @@ function reducer(state, action) {
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const { questions, status } = state;
+
   useEffect(function () {
     const controller = new AbortController();
 
