@@ -17,11 +17,7 @@ function Options({ question, dispatch, answer }) {
           onClick={() => {
             dispatch({
               type: "newAnswer",
-              payload: {
-                answer: i,
-                points:
-                  i === question.correctOption ? Number(question.points) : 0,
-              },
+              payload: i,
             });
           }}
         >
