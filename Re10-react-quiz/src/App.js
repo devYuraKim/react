@@ -13,6 +13,7 @@ const initialState = {
   status: "loading",
   index: 0,
   answer: null,
+  points: 0,
 };
 
 function reducer(state, action) {
@@ -24,7 +25,11 @@ function reducer(state, action) {
     case "start":
       return { ...state, status: "active" };
     case "newAnswer":
-      return { ...state, answer: action.payload };
+      return {
+        ...state,
+        answer: action.payload.answer,
+        points: state.points + action.payload.points,
+      };
     default:
       throw new Error("Action unknown");
   }
@@ -33,7 +38,7 @@ function reducer(state, action) {
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { questions, status, index, answer } = state;
+  const { questions, status, index, answer, points } = state;
 
   useEffect(function () {
     const controller = new AbortController();
@@ -70,6 +75,7 @@ function App() {
             question={questions[index]}
             dispatch={dispatch}
             answer={answer}
+            points={points}
           />
         )}
       </Main>

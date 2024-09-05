@@ -15,7 +15,14 @@ function Options({ question, dispatch, answer }) {
           key={i}
           disabled={hasAnswered}
           onClick={() => {
-            dispatch({ type: "newAnswer", payload: i });
+            dispatch({
+              type: "newAnswer",
+              payload: {
+                answer: i,
+                points:
+                  i === question.correctOption ? Number(question.points) : 0,
+              },
+            });
           }}
         >
           {option}
