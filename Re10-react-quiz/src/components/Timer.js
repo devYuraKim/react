@@ -3,7 +3,11 @@ import { useEffect } from "react";
 function Timer({ dispatch, time }) {
   useEffect(
     function () {
-      setInterval(() => dispatch({ type: "countdown" }), 1000);
+      const timer = setInterval(() => dispatch({ type: "countdown" }), 1000);
+
+      return () => {
+        clearInterval(timer);
+      };
     },
     [dispatch]
   );
