@@ -9,6 +9,8 @@ import Question from "./components/Question";
 import NextButton from "./components/NextButton";
 import Progress from "./components/Progress";
 import FinishScreen from "./components/FinishScreen";
+import Footer from "./components/Footer";
+import Timer from "./components/Timer";
 
 const initialState = {
   questions: [],
@@ -19,6 +21,7 @@ const initialState = {
   points: 0,
   highScore: 0,
   newHighScore: false,
+  time: 5,
 };
 
 function reducer(state, action) {
@@ -57,6 +60,11 @@ function reducer(state, action) {
         status: "ready",
         highScore: state.highScore,
       };
+    case "countdown":
+      return {
+        ...state,
+        time: state.time - 1,
+      };
     default:
       throw new Error("Action unknown");
   }
@@ -65,8 +73,16 @@ function reducer(state, action) {
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { questions, status, index, answer, points, highScore, newHighScore } =
-    state;
+  const {
+    questions,
+    status,
+    index,
+    answer,
+    points,
+    highScore,
+    newHighScore,
+    time,
+  } = state;
 
   const numQuestions = questions.length;
   const totalPoints = questions.reduce(
@@ -119,12 +135,16 @@ function App() {
               answer={answer}
               points={points}
             />
-            <NextButton
-              dispatch={dispatch}
-              answer={answer}
-              numQuestions={numQuestions}
-              index={index}
-            />
+
+            <Footer>
+              <Timer dispatch={dispatch} time={time} />
+              <NextButton
+                dispatch={dispatch}
+                answer={answer}
+                numQuestions={numQuestions}
+                index={index}
+              />
+            </Footer>
           </>
         )}
         {status === "finished" && (
