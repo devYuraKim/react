@@ -21,8 +21,10 @@ const initialState = {
   points: 0,
   highScore: 0,
   newHighScore: false,
-  time: 5,
+  time: 0,
 };
+
+const SECS_PER_QUESTION = 45;
 
 function reducer(state, action) {
   switch (action.type) {
@@ -31,7 +33,11 @@ function reducer(state, action) {
     case "dataFailed":
       return { ...state, status: "error" };
     case "start":
-      return { ...state, status: "active" };
+      return {
+        ...state,
+        status: "active",
+        time: state.questions.length * SECS_PER_QUESTION,
+      };
     case "newAnswer":
       const question = state.questions.at(state.index);
       return {
@@ -61,17 +67,11 @@ function reducer(state, action) {
         highScore: state.highScore,
       };
     case "countdown":
-      if (state.time > 0)
-        return {
-          ...state,
-          time: state.time - 1,
-        };
-      else
-        return {
-          ...state,
-          time: 0,
-          status: "finished",
-        };
+      return {
+        ...state,
+        time: state.time > 0 ? state.time - 1 : 0,
+        status: state.time === 0 ? "finished" : state.status,
+      };
     default:
       throw new Error("Action unknown");
   }

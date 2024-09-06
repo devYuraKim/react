@@ -11,7 +11,16 @@ function Timer({ dispatch, time }) {
     },
     [dispatch]
   );
-  return <div className="timer">{time}</div>;
+
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+
+  return (
+    <div className="timer">
+      {minutes < 10 ? `0${minutes}` : minutes}:
+      {seconds < 10 ? `0${seconds}` : seconds}
+    </div>
+  );
 }
 
 export default Timer;
