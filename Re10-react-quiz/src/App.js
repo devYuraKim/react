@@ -61,10 +61,17 @@ function reducer(state, action) {
         highScore: state.highScore,
       };
     case "countdown":
-      return {
-        ...state,
-        time: state.time - 1,
-      };
+      if (state.time > 0)
+        return {
+          ...state,
+          time: state.time - 1,
+        };
+      else
+        return {
+          ...state,
+          time: 0,
+          status: "finished",
+        };
     default:
       throw new Error("Action unknown");
   }
