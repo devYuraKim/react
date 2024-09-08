@@ -9,10 +9,11 @@ import PageNav from "./components/PageNav";
 function App() {
   return (
     <>
-      <PageNav />
       <p>constant element</p>
 
       <BrowserRouter>
+        <PageNav />
+
         <Routes>
           <Route index element={<Homepage />} />
           <Route path="/product" element={<Product />} />
