@@ -1,7 +1,25 @@
-import { createContext } from "react";
+import { createContext, useState, useContext } from "react";
 
-function PostContext() {
-  const PostContext = createContext();
+const SearchContext = createContext();
+
+function SearchProvider({ children }) {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  return (
+    <SearchContext.Provider
+      value={{
+        searchQuery,
+        setSearchQuery,
+      }}
+    >
+      {children}
+    </SearchContext.Provider>
+  );
 }
 
-export default PostContext;
+function useSearchContext() {
+  const context = useContext(SearchContext);
+  return context;
+}
+
+export { SearchProvider, useSearchContext };
