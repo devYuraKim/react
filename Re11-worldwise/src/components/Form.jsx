@@ -4,6 +4,9 @@ import { useState } from "react";
 
 import styles from "./Form.module.css";
 
+import Button from "./Button";
+import { useNavigate } from "react-router-dom";
+
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
     .toUpperCase()
@@ -12,11 +15,20 @@ export function convertToEmoji(countryCode) {
   return String.fromCodePoint(...codePoints);
 }
 
+const formatDate = (date) =>
+  new Intl.DateTimeFormat("en", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(new Date(date));
+
 function Form() {
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(formatDate(new Date()));
   const [notes, setNotes] = useState("");
+
+  const navigate = useNavigate();
 
   return (
     <form className={styles.form}>
@@ -24,7 +36,7 @@ function Form() {
         <label htmlFor="cityName">City name</label>
         <input
           id="cityName"
-          onChange={(e) => setCityName(e.target.value)}
+          onChange={(e) => setCityName(formatDate(e.target.value))}
           value={cityName}
         />
         {/* <span className={styles.flag}>{emoji}</span> */}
@@ -49,8 +61,10 @@ function Form() {
       </div>
 
       <div className={styles.buttons}>
-        <button>Add</button>
-        <button>&larr; Back</button>
+        <Button type="primary">Add</Button>
+        <Button onClick={() => {}} type="back">
+          &larr; Back
+        </Button>
       </div>
     </form>
   );
