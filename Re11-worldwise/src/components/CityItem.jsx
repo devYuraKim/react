@@ -1,5 +1,5 @@
 import styles from "./CityItem.module.css";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import City from "./City";
 
@@ -11,11 +11,10 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function CityItem({ city }) {
-  function handleClick() {
-    return <Navigate to={city.id} element={<City />} />;
-  }
+  const navigate = useNavigate();
+
   return (
-    <li className={styles.cityItem} onClick={handleClick}>
+    <li className={styles.cityItem} onClick={() => navigate(`${city.id}`)}>
       <span className={styles.emoji}>{city.emoji}</span>
       <h3 className={styles.name}>{city.cityName}</h3>
       <time className={styles.date}> ({formatDate(city.date)}) </time>
