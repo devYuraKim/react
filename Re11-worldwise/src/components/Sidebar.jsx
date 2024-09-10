@@ -10,6 +10,7 @@ function Sidebar() {
       <Logo />
       <AppNav />
       <p>List of Cities</p>
+      <Outlet />
       <Footer />
     </div>
   );
