@@ -4,16 +4,15 @@ import Product from "./pages/Product";
 import Pricing from "./pages/Pricing";
 import Homepage from "./pages/Homepage";
 import PageNotFound from "./pages/PageNotFound";
-import PageNav from "./components/PageNav";
 import AppLayout from "./pages/AppLayout";
 
 function App() {
   return (
     <>
-      <p>constant element</p>
+      {/* <p>constant element</p> */}
 
       <BrowserRouter>
-        <PageNav />
+        {/* <PageNav /> */}
 
         <Routes>
           <Route index element={<Homepage />} />
@@ -21,9 +20,12 @@ function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/app" element={<AppLayout />}>
             <Route
+              index
               path="cities"
               element={<p>CITIES COMPONENT WILL BE RENDERED HERE</p>}
             />
+            <Route path="countries" element={<p>COUNTRIES</p>} />
+            <Route path="form" element={<p>FORM</p>} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
