@@ -8,7 +8,6 @@ function createRandomPost() {
   };
 }
 
-const PostContext = createContext();
 const SearchContext = createContext();
 
 function App() {
@@ -45,13 +44,7 @@ function App() {
   );
 
   return (
-    <PostContext.Provider
-      value={{
-        posts: searchedPosts,
-        onAddPost: handleAddPost,
-        onClearPosts: handleClearPosts,
-      }}
-    >
+    
       <SearchContext.Provider
         value={{
           searchQuery,
