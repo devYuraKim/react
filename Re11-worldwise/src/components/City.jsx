@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import styles from "./City.module.css";
 
 function City({ city }) {
@@ -14,9 +14,27 @@ function City({ city }) {
 
   const { cityId } = useParams();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const lat = searchParams.get("lat");
+  const lng = searchParams.get("lng");
+
   return (
     <div className={styles.city}>
       <h1>{cityId}</h1>
+      <h1>
+        {lat}, {lng}
+      </h1>
+
+      <button
+        onClick={() =>
+          setSearchParams({
+            lat: 0,
+            lng: lng,
+          })
+        }
+      >
+        Change Latitude
+      </button>
     </div>
 
     //   <div className={styles.city}>
