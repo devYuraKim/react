@@ -1,6 +1,7 @@
+import { useParams } from "react-router-dom";
 import styles from "./City.module.css";
 
-function City() {
+function City({ city }) {
   // TEMP DATA
   const currentCity = {
     cityName: "Lisbon",
@@ -11,8 +12,12 @@ function City() {
 
   const { cityName, emoji, date, notes } = currentCity;
 
+  const { cityId } = useParams();
+
   return (
-    <div>temp content</div>
+    <div className={styles.city}>
+      <h1>{cityId}</h1>
+    </div>
 
     //   <div className={styles.city}>
     //     <div className={styles.row}>

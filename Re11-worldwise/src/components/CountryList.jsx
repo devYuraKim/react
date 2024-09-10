@@ -7,7 +7,10 @@ function CountryList({ cities }) {
     if (
       !newArray.map((newElement) => newElement.country).includes(city.country)
     )
-      return [...newArray, { country: city.country, emoji: city.emoji }];
+      return [
+        ...newArray,
+        { country: city.country, emoji: city.emoji, id: city.id },
+      ];
     else return newArray;
   }, []);
 
