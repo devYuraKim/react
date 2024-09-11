@@ -1,8 +1,11 @@
 import styles from "./CountryList.module.css";
 
 import CountryItem from "./CountryItem";
+import { useCities } from "../../contexts/CitiesContext";
 
-function CountryList({ cities }) {
+function CountryList() {
+  const { cities } = useCities();
+
   const countries = cities.reduce((newArray, city) => {
     if (
       !newArray.map((newElement) => newElement.country).includes(city.country)
