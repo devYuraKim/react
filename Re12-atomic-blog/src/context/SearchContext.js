@@ -19,6 +19,7 @@ function SearchProvider({ children }) {
 
 function useSearchContext() {
   const context = useContext(SearchContext);
+  if (!context) throw new Error("context used outside Search Provider");
   return context;
 }
 

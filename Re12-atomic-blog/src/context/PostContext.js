@@ -51,6 +51,7 @@ function PostProvider({ children }) {
 
 function usePostContext() {
   const context = useContext(PostContext);
+  if (!context) throw new Error("context used outside Post Provider");
   return context;
 }
 
