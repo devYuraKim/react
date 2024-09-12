@@ -5,7 +5,7 @@ import { useState } from "react";
 import styles from "./Form.module.css";
 
 import Button from "./Button";
-import { replace, useNavigate } from "react-router-dom";
+import { replace, useNavigate, useSearchParams } from "react-router-dom";
 import BackButton from "./BackButton";
 
 export function convertToEmoji(countryCode) {
@@ -29,6 +29,10 @@ function Form() {
   const [date, setDate] = useState(formatDate(new Date()));
   const [notes, setNotes] = useState("");
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const lat = searchParams.get("lat");
+  const lng = searchParams.get("lng");
+
   return (
     <form className={styles.form}>
       <div className={styles.row}>
@@ -40,7 +44,6 @@ function Form() {
         />
         {/* <span className={styles.flag}>{emoji}</span> */}
       </div>
-
       <div className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
         <input
@@ -49,7 +52,6 @@ function Form() {
           value={date}
         />
       </div>
-
       <div className={styles.row}>
         <label htmlFor="notes">Notes about your trip to {cityName}</label>
         <textarea
@@ -58,7 +60,6 @@ function Form() {
           value={notes}
         />
       </div>
-
       <div className={styles.buttons}>
         <Button type="primary">Add</Button>
         <BackButton />
