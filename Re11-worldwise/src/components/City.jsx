@@ -11,15 +11,14 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function City() {
-  const { id } = useParams();
+  const { cityId } = useParams();
   const { currentCity, getCurrentCity } = useCities();
 
   useEffect(
     function () {
-      getCurrentCity(id);
-      console.log(currentCity);
+      getCurrentCity(cityId);
     },
-    [id]
+    [cityId]
   );
 
   const { emoji, cityName, date, notes } = currentCity;
