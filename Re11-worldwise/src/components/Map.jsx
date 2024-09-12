@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import styles from "./Map.module.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -10,30 +10,29 @@ function Map() {
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
 
+  const [mapPosition, setMapPosition] = useState([40.7128, -74.006]);
+
   useEffect(
     function () {
-      const defaultLat = lat || "40.7128";
-      const defaultLng = lng || "-74.0060";
-
-      if (!lat || !lng) {
-        setSearchParams({ lat: defaultLat, lng: defaultLng });
-      }
-    }[(lat, lng, setSearchParams)]
+      if (!lat || !lng) return;
+      else setMapPosition([lat, lng]);
+    },
+    [lat, lng]
   );
 
   return (
     <div className={styles.mapContainer} onClick={() => navigate("form")}>
       <MapContainer
         className={styles.map}
-        center={[lat || 40.7128, lng || -74.006]}
+        center={mapPosition}
         zoom={5}
-        scrollWheelZoom={false}
+        scrollWheelZoom={true}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
-        <Marker position={[lat || 40.7128, lng || -74.006]}>
+        <Marker position={mapPosition}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
