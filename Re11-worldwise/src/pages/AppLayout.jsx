@@ -2,8 +2,9 @@ import styles from "./AppLayout.module.css";
 import Sidebar from "../components/Sidebar";
 import User from "../components/User";
 import Map from "../components/Map";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 function AppLayout() {
   const navigate = useNavigate();
@@ -25,6 +26,17 @@ function AppLayout() {
       return () => document.removeEventListener("keydown", useBackspace);
     },
     [navigate]
+  );
+
+  const { isAuthenticated } = useAuth();
+
+  useEffect(
+    function () {
+      if (!isAuthenticated) {
+        navigate("/login");
+      }
+    },
+    [isAuthenticated, navigate]
   );
 
   return (

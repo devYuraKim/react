@@ -1,10 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
+import { useAuth } from "../../contexts/AuthContext";
+import Button from "../components/Button";
 
 export default function Login() {
   // PRE-FILL FOR DEV PURPOSES
   const [email, setEmail] = useState("jack@example.com");
   const [password, setPassword] = useState("qwerty");
+
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   return (
     <main className={styles.login}>
@@ -30,7 +36,16 @@ export default function Login() {
         </div>
 
         <div>
-          <button>Login</button>
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              login(email, password);
+              navigate("/app");
+            }}
+            type="primary"
+          >
+            Login
+          </Button>
         </div>
       </form>
     </main>
