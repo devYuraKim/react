@@ -59,54 +59,6 @@
         "lat": "-8.727690321614553",
         "lng": "115.17268180847168"
       }
-    },
-    {
-      "id": "674a",
-      "cityName": "Ottawa",
-      "country": "Canada",
-      "emoji": "🇨🇦",
-      "date": "Sep 15, 2024",
-      "notes": "never been there",
-      "position": {
-        "lat": "45.40509487118674",
-        "lng": "-75.67950471574804"
-      }
-    },
-    {
-      "id": "bc75",
-      "cityName": "Washington",
-      "country": "United States of America (the)",
-      "emoji": "🇺🇸",
-      "date": "Sep 15, 2024",
-      "notes": "never been there",
-      "position": {
-        "lat": "38.89382243613501",
-        "lng": "-77.04644085511593"
-      }
-    },
-    {
-      "id": "280b",
-      "cityName": "Atlantic City",
-      "country": "United States of America (the)",
-      "emoji": "🇺🇸",
-      "date": "Sep 15, 2024",
-      "notes": "never been here",
-      "position": {
-        "lat": "39.37001490959019",
-        "lng": "-74.43280281435706"
-      }
-    },
-    {
-      "id": "4dcf",
-      "cityName": "Hardwick",
-      "country": "United States of America (the)",
-      "emoji": "🇺🇸",
-      "date": "Sep 15, 2024",
-      "notes": "???",
-      "position": {
-        "lat": "44.534002530889666",
-        "lng": "-72.37240115276124"
-      }
     }
   ]
 }
