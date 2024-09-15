@@ -16,9 +16,9 @@ import Login from "./pages/Login";
 function App() {
   return (
     <>
-      <AuthProvider>
-        <CitiesProvider>
-          <BrowserRouter>
+      <BrowserRouter>
+        <AuthProvider>
+          <CitiesProvider>
             <Routes>
               <Route index element={<Homepage />} />
               <Route path="/product" element={<Product />} />
@@ -33,9 +33,9 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
-          </BrowserRouter>
-        </CitiesProvider>
-      </AuthProvider>
+          </CitiesProvider>
+        </AuthProvider>
+      </BrowserRouter>
     </>
   );
 }
