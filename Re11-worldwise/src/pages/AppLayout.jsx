@@ -33,7 +33,7 @@ function AppLayout() {
   useEffect(
     function () {
       if (!isAuthenticated) {
-        navigate("/login");
+        navigate("/login", { replace: true });
       }
     },
     [isAuthenticated, navigate]
