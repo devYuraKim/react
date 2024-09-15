@@ -11,7 +11,13 @@ function AppLayout() {
   useEffect(
     function () {
       function useBackspace(e) {
-        if (e.code === "Backspace") navigate(-1);
+        const activeElement = document.activeElement.tagName.toLowerCase();
+        if (
+          activeElement !== "textarea" &&
+          activeElement !== "input" &&
+          e.code === "Backspace"
+        )
+          navigate(-1);
       }
 
       document.addEventListener("keydown", useBackspace);
