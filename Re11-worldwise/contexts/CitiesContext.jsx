@@ -33,12 +33,14 @@ function reducer(state, action) {
         ...state,
         isLoading: false,
         cities: [...state.cities, action.payload],
+        currentCity: action.payload,
       };
     case "city/deleted":
       return {
         ...state,
         isLoading: false,
         cities: [...state.cities.filter((city) => action.payload !== city.id)],
+        currentCity: {},
       };
     case "rejected":
       return { ...state, isLoading: false, error: action.payload };
@@ -49,7 +51,7 @@ function reducer(state, action) {
 }
 
 function CitiesProvider({ children }) {
-  const [{ cities, isLoading, currentCity }, dispatch] = useReducer(
+  const [{ cities, isLoading, currentCity, error }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -72,6 +74,7 @@ function CitiesProvider({ children }) {
   }, []);
 
   async function getCurrentCity(id) {
+    if (currentCity.id === Number(id)) return;
     dispatch({ type: "loading" });
     try {
       //이 URL이면 특정 city 객체만 반환됨
@@ -125,6 +128,7 @@ function CitiesProvider({ children }) {
         cities,
         isLoading,
         currentCity,
+        error,
         getCurrentCity,
         createCity,
         deleteCity,
