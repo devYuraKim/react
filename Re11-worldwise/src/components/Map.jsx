@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./Map.module.css";
 import {
   MapContainer,
@@ -41,7 +41,6 @@ function Map() {
 
   useEffect(
     function () {
-      console.log(geolocationPosition);
       if (!geolocationPosition) return;
       setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
     },
