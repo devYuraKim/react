@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
 import { useAuth } from "../../contexts/AuthContext";
 import Button from "../components/Button";
@@ -10,11 +10,23 @@ export default function Login() {
   const [password, setPassword] = useState("qwerty");
 
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!email || !password) {
+      alert("please enter your email and password");
+      return;
+    }
+    login(email, password);
+    navigate("/app", { replace: true });
+  }
+
+  if (isAuthenticated) return <Navigate to="/app" />;
 
   return (
     <main className={styles.login}>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.row}>
           <label htmlFor="email">Email address</label>
           <input
@@ -36,16 +48,7 @@ export default function Login() {
         </div>
 
         <div>
-          <Button
-            onClick={(e) => {
-              e.preventDefault();
-              login(email, password);
-              navigate("/app");
-            }}
-            type="primary"
-          >
-            Login
-          </Button>
+          <Button type="primary">Login</Button>
         </div>
       </form>
     </main>
