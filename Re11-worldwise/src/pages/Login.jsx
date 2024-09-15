@@ -9,8 +9,7 @@ export default function Login() {
   const [email, setEmail] = useState("jack@example.com");
   const [password, setPassword] = useState("qwerty");
 
-  const navigate = useNavigate();
-  const { login, isAuthenticated } = useAuth();
+  const { login } = useAuth();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,10 +18,7 @@ export default function Login() {
       return;
     }
     login(email, password);
-    navigate("/app", { replace: true });
   }
-
-  if (isAuthenticated) return <Navigate to="/app" />;
 
   return (
     <main className={styles.login}>
