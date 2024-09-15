@@ -11,17 +11,21 @@ const initialState = {
   currentCity: {},
 };
 
-function CitiesProvider({ children }) {
-  const [state, dispatch] = useReducer(initialState, reducer);
-
-  function reducer(action, state) {
-    switch (action.type) {
-      case "setCities":
-        {...state, cities: [...state.cities, action.payload]};
-      default:
-        return null;
-    }
+function reducer(action, state) {
+  switch (action.type) {
+    case "cities/loaded":
+      return {
+        ...state,
+        isLoading: false,
+        cities: [...state.cities, action.payload],
+      };
+    default:
+      return null;
   }
+}
+
+function CitiesProvider({ children }) {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
