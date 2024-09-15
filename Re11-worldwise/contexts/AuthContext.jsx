@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
 
 const FAKE_USER = {
   name: "Jack",
@@ -31,6 +32,8 @@ function AuthProvider({ children }) {
     initialState
   );
 
+  const navigate = useNavigate();
+
   function login(email, password) {
     if (email === FAKE_USER.email && password === FAKE_USER.password) {
       dispatch({ type: "login", payload: FAKE_USER });
@@ -39,6 +42,7 @@ function AuthProvider({ children }) {
 
   function logout() {
     dispatch({ type: "logout" });
+    navigate("/");
   }
 
   return (

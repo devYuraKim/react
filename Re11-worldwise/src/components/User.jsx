@@ -14,7 +14,6 @@ function User() {
       <button
         onClick={() => {
           logout();
-          navigate("/");
         }}
       >
         Logout
