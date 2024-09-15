@@ -1,11 +1,28 @@
 import { useContext } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 import { createContext } from "react";
 
 const SERVER_URL = "http://localhost:8000/cities";
 const CitiesContext = createContext();
 
+const initialState = {
+  cities: [],
+  isLoading: false,
+  currentCity: {},
+};
+
 function CitiesProvider({ children }) {
+  const [state, dispatch] = useReducer(initialState, reducer);
+
+  function reducer(action, state) {
+    switch (action.type) {
+      case "setCities":
+        {...state, cities: [...state.cities, action.payload]};
+      default:
+        return null;
+    }
+  }
+
   const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentCity, setCurrentCity] = useState({});
