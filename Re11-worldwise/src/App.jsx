@@ -16,12 +16,9 @@ import Login from "./pages/Login";
 function App() {
   return (
     <>
-      {/* <p>constant element</p> */}
       <AuthProvider>
         <CitiesProvider>
           <BrowserRouter>
-            {/* <PageNav /> */}
-
             <Routes>
               <Route index element={<Homepage />} />
               <Route path="/product" element={<Product />} />
