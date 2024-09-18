@@ -7,22 +7,12 @@ import NextButton from "./NextButton";
 import Progress from "./Progress";
 import Footer from "./Footer";
 import Timer from "./Timer";
-import { useEffect } from "react";
 import StartScreen from "./StartScreen";
 import FinishScreen from "./FinishScreen";
 import { useQuiz } from "../contexts/QuizContext";
 
 export default function App() {
-  const { dispatch, status } = useQuiz();
-  useEffect(
-    function () {
-      fetch("http://localhost:8000/questions")
-        .then((res) => res.json())
-        .then((data) => dispatch({ type: "dataReceived", payload: data }))
-        .catch((err) => dispatch({ type: "dataFailed" }));
-    },
-    [dispatch]
-  );
+  const { status } = useQuiz();
 
   return (
     <div className="app">
