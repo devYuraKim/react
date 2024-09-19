@@ -7,8 +7,7 @@ function App() {
   const [allowSound, setAllowSound] = useState(true);
 
   // Will be be AM or PM
-  const partOfDay = "AM";
-  // time.slice(-2);
+  const partOfDay = new Date().getHours() < 12 ? "AM" : "PM";
 
   const workouts = [
     {
