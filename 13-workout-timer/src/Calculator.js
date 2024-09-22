@@ -27,10 +27,12 @@ function Calculator({ workouts, allowSound }) {
 
   function handleInc() {
     setDuration((prev) => Math.floor(prev) + 1);
+    playSound();
   }
 
   function handleDec() {
     setDuration((prev) => (duration > 1 ? Math.ceil(prev) - 1 : 0));
+    playSound();
   }
 
   return (
