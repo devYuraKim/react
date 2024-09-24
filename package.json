@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@redux-devtools/remote": "^0.9.3",
     "@reduxjs/toolkit": "^2.2.7",
     "react-datepicker": "^7.3.0"
   }

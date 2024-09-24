@@ -2,7 +2,7 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 
 import { thunk } from "redux-thunk";
-import accountReducer from "./features/accounts/accountSlice";
+import accountReducer from "./features/accounts/accountSlice(current)";
 import customerReducer from "./features/customers/customerSlice";
 import { composeWithDevTools } from "remote-redux-devtools";
 

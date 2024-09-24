@@ -1,6 +1,6 @@
 import accountReducer from "./features/accounts/accountSlice";
 import customerReducer from "./features/customers/customerSlice";
-import devToolsEnhancer from "remote-redux-devtools";
+import { devToolsEnhancer } from "@redux-devtools/remote";
 import { configureStore } from "@reduxjs/toolkit";
 
 const store = configureStore({
@@ -15,7 +15,9 @@ const store = configureStore({
         realtime: true,
         name: "redux intro",
         hostname: "localhost",
-        port: 8000,
+        port: 3333,
+        suppressConnectErrors: false,
+        trace: true,
       })
     ),
 });
