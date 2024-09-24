@@ -1,25 +1,15 @@
-//WARNING: use createStore for learning purpose only
-import { applyMiddleware, combineReducers, createStore } from "redux";
-import { thunk } from "redux-thunk";
-import accountReducer from "./features/accounts/accountSlice";
-import customerReducer from "./features/customers/customerSlice";
+//replace {createStore} with {configureStore}
+import { configureStore } from "@reduxjs/toolkit";
 import { composeWithDevTools } from "remote-redux-devtools";
 
-const rootReducer = combineReducers({
-  account: accountReducer,
-  customer: customerReducer,
-});
+import accountReducer from "./features/accounts/accountSlice";
+import customerReducer from "./features/customers/customerSlice";
 
-const composeEnhancers = composeWithDevTools({
-  realtime: true,
-  name: "redux intro",
-  hostname: "localhost",
-  port: 8000,
+const store = configureStore({
+  reducer: {
+    account: accountReducer,
+    customer: customerReducer,
+  },
 });
-
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
-);
 
 export default store;
