@@ -8,7 +8,6 @@ const store = configureStore({
     account: accountReducer,
     customer: customerReducer,
   },
-  devTools: false,
   //with extra enhancers setting, Redux Devtools works on Safari but not on Chrome
   enhancers: (getDefaultEnhancers) =>
     getDefaultEnhancers().concat(
