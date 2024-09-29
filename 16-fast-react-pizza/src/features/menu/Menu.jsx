@@ -1,25 +1,15 @@
 import { useLoaderData } from "react-router-dom";
 import { getMenu } from "../../services/apiRestaurant";
+import MenuItem from "./MenuItem";
 
 function Menu() {
   const menu = useLoaderData();
   return (
-    <>
-      <h1>Menu</h1>
+    <ul>
       {menu.map((item) => (
-        <div key={item.id}>
-          <h3>{item.name}</h3>
-          <img src={item.imageUrl} />
-          <p>${item.unitPrice}</p>
-          <p>
-            {item.ingredients.map((ingredient, i) =>
-              item.ingredients.length - 1 > i ? `${ingredient}, ` : ingredient
-            )}
-          </p>
-          {item.soldOut && <p>SOLD OUT</p>}
-        </div>
+        <MenuItem key={item.id} pizza={item} />
       ))}
-    </>
+    </ul>
   );
 }
 
