@@ -13,7 +13,7 @@ function Menu() {
           <p>${item.unitPrice}</p>
           <p>
             {item.ingredients.map((ingredient, i) =>
-              ingredients.length - 1 < i ? `${ingredient}, ` : { ingredient }
+              item.ingredients.length - 1 > i ? `${ingredient}, ` : ingredient
             )}
           </p>
           {item.soldOut && <p>SOLD OUT</p>}
