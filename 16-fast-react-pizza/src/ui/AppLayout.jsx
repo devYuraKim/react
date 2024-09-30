@@ -1,8 +1,11 @@
 import Header from "./Header";
 import CartOverview from "../features/cart/CartOverview";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
 
 function AppLayout() {
+  const navigation = useNavigation();
+  console.log(navigation);
+
   return (
     <>
       <Header />
