@@ -7,6 +7,7 @@ import CreateOrder from "./features/order/CreateOrder";
 import Order from "./features/order/Order";
 import AppLayout from "./ui/AppLayout";
 import Error from "./ui/Error";
+import SearchOrder from "./features/order/SearchOrder";
 
 const router = createBrowserRouter([
   {
