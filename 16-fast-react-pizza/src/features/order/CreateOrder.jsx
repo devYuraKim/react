@@ -39,7 +39,8 @@ function CreateOrder() {
     <div>
       <h2>Ready to order? Lets go!</h2>
 
-      <Form>
+      {/* <Form method="POST" action="/order/new"> */}
+      <Form method="POST">
         <div>
           <label>First Name</label>
           <input type="text" name="customer" required />
