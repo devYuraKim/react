@@ -81,7 +81,10 @@ function CreateOrder() {
 
 export async function action({ request }) {
   const formData = await request.formData();
-  console.log(formData);
+  const data = Object.fromEntries(formData);
+  console.log(data.customer);
+  console.log(data.phone);
+  console.log(data.address);
   return null;
 }
 
