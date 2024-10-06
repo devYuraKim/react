@@ -39,7 +39,7 @@ function CreateOrder() {
     <div>
       <h2>Ready to order? Lets go!</h2>
 
-      {/* <Form method="POST" action="/order/new"> */}
+      {/* Define the 'action' function in the route using 'createBrowserRouter' to handle form submissions via the 'request' parameter. Set the form's method="post" to trigger the action when submitted. */}
       <Form method="POST">
         <div>
           <label>First Name</label>
