@@ -31,6 +31,8 @@ const router = createBrowserRouter([
       },
       { path: "/cart", element: <Cart /> },
       { path: "/order/new", element: <CreateOrder /> },
+      //the value of :orderId can be accessed inside the orderLoader function
+      //use "params" to access the route context, then "orderId" to fetch the specific data
       { path: "/order/:orderId", element: <Order />, loader: orderLoader },
     ],
   },
