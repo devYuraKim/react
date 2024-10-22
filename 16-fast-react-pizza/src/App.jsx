@@ -10,32 +10,13 @@ import Order, { loader as orderLoader } from "./features/order/Order";
 import AppLayout from "./ui/AppLayout";
 import Error from "./ui/Error";
 
+//data retching react-router: createBrowserRouter
 const router = createBrowserRouter([
-  {
-    element: <AppLayout />,
-    errorElement: <Error />,
-    children: [
-      { path: "/", element: <Home /> },
-      {
-        path: "/menu",
-        element: <Menu />,
-        loader: menuLoader,
-        errorElement: <Error />,
-      },
-      { path: "/cart", element: <Cart /> },
-      {
-        path: "/order/new",
-        element: <CreateOrder />,
-        action: createOrderAction,
-      },
-      {
-        path: "/order/:orderId",
-        element: <Order />,
-        loader: orderLoader,
-        errorElement: <Error />,
-      },
-    ],
-  },
+  { path: "/", element: <Home /> },
+  { path: "/menu", element: <Menu /> },
+  { path: "/cart", element: <Cart /> },
+  { path: "/order/new", element: <CreateOrder /> },
+  { path: "/order/:orderId", element: <Order /> },
 ]);
 
 function App() {
