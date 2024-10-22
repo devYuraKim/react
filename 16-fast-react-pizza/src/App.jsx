@@ -10,7 +10,7 @@ import Order, { loader as orderLoader } from "./features/order/Order";
 import AppLayout from "./ui/AppLayout";
 import Error from "./ui/Error";
 
-//data retching react-router: createBrowserRouter
+//data fetching/loading react-router: createBrowserRouter
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/menu", element: <Menu /> },
@@ -20,6 +20,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  //renders the elements based on the path defined in the router
   return <RouterProvider router={router} />;
 }
 
