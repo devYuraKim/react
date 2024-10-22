@@ -13,6 +13,7 @@ function AppLayout() {
       <Header />
 
       <main>
+        {/* this is where the child components from the router will be displayed*/}
         <Outlet />
       </main>
 
