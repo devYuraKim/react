@@ -16,6 +16,7 @@ import Error from "./ui/Error";
 const router = createBrowserRouter([
   //without a path attribute and with a children attribute, this acts as a layout component(layout route)
   {
+    errorElement: <Error />,
     element: <AppLayout />,
     children: [
       { path: "/", element: <Home /> },

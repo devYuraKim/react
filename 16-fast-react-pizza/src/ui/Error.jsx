@@ -2,6 +2,7 @@ import { useNavigate, useRouteError } from "react-router-dom";
 
 function Error() {
   const navigate = useNavigate();
+  //a HOOK to retrieve any error that might have occurred during the loading of a route
   const error = useRouteError();
   console.log(error);
 
