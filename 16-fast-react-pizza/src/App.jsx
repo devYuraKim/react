@@ -12,12 +12,14 @@ import Error from "./ui/Error";
 
 //data fetching/loading react-router: createBrowserRouter
 const router = createBrowserRouter([
-  //without a path attribute and with a children attribute, this acts as a layout component
+  //without a path attribute and with a children attribute, this acts as a layout component(layout route)
   {
     element: <AppLayout />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/menu", element: <Menu /> },
+      //2.provide the loader function to the menu route
+      //loader: a "function" that fetches data from an API
+      { path: "/menu", element: <Menu />, loader: menuLoader },
       { path: "/cart", element: <Cart /> },
       { path: "/order/new", element: <CreateOrder /> },
       { path: "/order/:orderId", element: <Order /> },
