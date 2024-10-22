@@ -11,6 +11,8 @@ import AppLayout from "./ui/AppLayout";
 import Error from "./ui/Error";
 
 //data fetching/loading react-router: createBrowserRouter
+//loader function is executed BEFORE rendering
+//cf) useEffect renders first then fetches data
 const router = createBrowserRouter([
   //without a path attribute and with a children attribute, this acts as a layout component(layout route)
   {
