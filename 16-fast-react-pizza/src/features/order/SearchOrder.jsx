@@ -6,6 +6,7 @@ function SearchOrder() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
+  //Structure for navigating the user from the input form to the results page
   function handleSubmit(e) {
     e.preventDefault();
     if (!query) return;
