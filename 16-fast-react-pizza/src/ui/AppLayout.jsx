@@ -4,6 +4,8 @@ import { Outlet, useNavigation } from "react-router-dom";
 import Loader from "./Loader";
 
 function AppLayout() {
+  //loading indicator using useNavigation()
+  //do not confuse with useNavigate()
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
 
