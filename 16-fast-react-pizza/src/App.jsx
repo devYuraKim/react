@@ -22,7 +22,13 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       //2.provide the loader function to the menu route
       //loader: a "function" that fetches data from an API
-      { path: "/menu", element: <Menu />, loader: menuLoader },
+      {
+        path: "/menu",
+        element: <Menu />,
+        loader: menuLoader,
+        //error component displayed within Menu component
+        errorElement: <Error />,
+      },
       { path: "/cart", element: <Cart /> },
       { path: "/order/new", element: <CreateOrder /> },
       { path: "/order/:orderId", element: <Order /> },
